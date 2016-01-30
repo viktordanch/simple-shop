@@ -6,6 +6,7 @@ requirejs.config({
     // hbs: 'sources/hbs',
     handlebars: 'sources/handlebars',
     text: 'sources/text',
+    spinjs: 'sources/spin.min',
     // foundation: 'sources/foundation',
     // modernizr: 'sources/modernizr',
     precompiledTemplates: 'viktor/my_shop_b/precompiledTemplates',
@@ -46,9 +47,11 @@ requirejs.config({
 });
 
 define(function(require){
+  require('spinjs');
+
   function sideNav() {
     console.log('sideNav')
-    console.log($(window).width() < 769)
+    console.log($(window).width() < 769);
     if ($(window).width() < 769) {
       $('.off-canvas-wrap').removeClass('move-right');
       $('.left-off-canvas-toggle').show();
@@ -118,6 +121,39 @@ define(function(require){
       $(this).find("span").text(icon);
     });
   });
+
+
+  // infinity scroll
+  var page = 1;
+  var isLoading = false;
+
+  $('.main').scroll(function() {
+    // Modify to adjust trigger point. You may want to add content
+    // a little before the end of the page is reached. You may also want
+    // to make sure you can't retrigger the end of page condition while
+    // content is still loading.
+
+    var isBottom = $('.main > .container').height() <= $('.main').scrollTop() + $('.main').height() + 15;
+    if (isBottom && !isLoading) {
+      isLoading = true;
+      $('.main .productsList').append('<div class="spinnerContainer">Loading</div>')
+      setTimeout(loadMoreContent, 2000);
+      //loadMoreContent();
+    }
+  });
+
+  function loadMoreContent() {
+    console.log('loadMoreContent');
+    isLoading = false;
+    $('.main .productsList .spinnerContainer').remove()
+    //$('.main .productsList').append($('.main .productsList').html())
+    //$.get('content.html', function(data) {
+    //  if (data != '') {
+    //    $('#content p:last').after(data);
+    //  }
+    //});
+
+  };
 
   var Backbone = require('backbone');
   var router = require('my_shop_b_router');

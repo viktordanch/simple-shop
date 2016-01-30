@@ -15,5 +15,3 @@
 #= require foundation
 # require angular
 
-() ->
-  $(document).foundation()

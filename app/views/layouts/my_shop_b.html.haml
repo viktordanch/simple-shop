@@ -50,7 +50,7 @@
               MENU
           %li.name
             %h1
-              %a{ href: my_shop_b_root_path }
+              %a{ href: root_path }
                 %img{ src: image_path('shop_b/logo.gif') }
           / Mobile Menu Toggle
           %li.toggle-topbar.menu-icon
@@ -73,17 +73,17 @@
           %ul.right.topProductMenu
             %li.divider
             %li
-              %a{ href: my_shop_b_cart_index_path, title: 'My Cart' } My Cart
+              %a{ href: cart_index_path, title: 'My Cart' } My Cart
             %li.divider
             %li
-              %a{ href: my_shop_b_orders_path, title: 'My Orders' } My Orders
+              %a{ href: orders_path, title: 'My Orders' } My Orders
             %li.divider
             %li.has-dropdown
-              %a{ href: my_shop_b_products_path, title: 'Catalog' } Catalog
+              %a{ href: products_path, title: 'Catalog' } Catalog
               %ul.dropdown
                 - Category.catalog.each do |category, value|
                   %li
-                    %a.productLink{ href: "#{my_shop_b_products_path}?category=#{category + '/'}" }= category
+                    %a.productLink{ href: "#{products_path}?category=#{category + '/'}" }= category
 
             %li.divider
             %li.has-form
@@ -105,10 +105,10 @@
               - url = "#{category}/"
               - if _catalog.keys.blank?
                 %li
-                  %a.productLink{ href: "#{my_shop_b_products}?category=#{url}" }= category
+                  %a.productLink{ href: "#{products_path}?category=#{url}" }= category
               - else
                 %li
-                  %a.productLink.off-canvas-submenu-call{ href: "#{my_shop_b_products_path}?category=#{url}" }
+                  %a.productLink.off-canvas-submenu-call{ href: "#{products_path}?category=#{url}" }
                     = category
                     %span.right +
                 %ul.off-canvas-submenu
@@ -117,10 +117,10 @@
                     - url = "#{category}/#{_sub_1}"
                     - if _catalog.keys.blank?
                       %li
-                        %a.productLink{ href: "#{my_shop_b_products_path}?category=#{url}" }= _sub_1
+                        %a.productLink{ href: "#{products_path}?category=#{url}" }= _sub_1
                     - else
                       %li
-                        %a.productLink.off-canvas-submenu-call{ href: "#{my_shop_b_products_path}?category=#{url}" }
+                        %a.productLink.off-canvas-submenu-call{ href: "#{products_path}?category=#{url}" }
                           = _sub_1
                           %span.right +
                       %ul.off-canvas-submenu
@@ -129,11 +129,11 @@
                           - url = "#{category}/#{_sub_1}/#{_sub_2}"
                           - if _catalog.keys.blank?
                             %li
-                              %a.productLink{ href: "#{my_shop_b_products_path}?category=#{url}" }
+                              %a.productLink{ href: "#{products_path}?category=#{url}" }
                                 = _sub_2
                           - else
                             %li
-                              %a.productLink.off-canvas-submenu-call{ href: "#{my_shop_b_products_path}?category=#{url}" }
+                              %a.productLink.off-canvas-submenu-call{ href: "#{products_path}?category=#{url}" }
                                 = _sub_2
                                 %span.right +
                             %ul.off-canvas-submenu
@@ -142,10 +142,10 @@
                                 - url = "#{category}/#{_sub_1}/#{_sub_2}/#{_sub_3}"
                                 - if _catalog.keys.blank?
                                   %li
-                                    %a.productLink{ href: "#{my_shop_b_products_path}?category=#{url}" }= _sub_3
+                                    %a.productLink{ href: "#{products_path}?category=#{url}" }= _sub_3
                                 - else
                                   %li
-                                    %a.productLink.off-canvas-submenu-call{ href: "#{my_shop_b_products_path}?category=#{url}" }
+                                    %a.productLink.off-canvas-submenu-call{ href: "#{products_path}?category=#{url}" }
                                       = _sub_3
                                       %span.right +
                                   %ul.off-canvas-submenu
@@ -154,18 +154,18 @@
                                       - url = "#{category}/#{_sub_1}/#{_sub_2}/#{_sub_3}/#{_sub_4}"
                                       - if _catalog.keys.blank?
                                         %li
-                                          %a.productLink{ href: "#{my_shop_b_products_path}?category=#{url}" }
+                                          %a.productLink{ href: "#{products_path}?category=#{url}" }
                                             = _sub_4
                                       - else
                                         %li
-                                          %a.productLink.off-canvas-submenu-call{ href: "#{my_shop_b_products_path}?category=#{url}" }
+                                          %a.productLink.off-canvas-submenu-call{ href: "#{products_path}?category=#{url}" }
                                             = _sub_4
                                             %span.right +
                                         %ul.off-canvas-submenu
                                           - _catalog.keys.sort.each do |_sub_5|
                                             - url = "#{category}/#{_sub_1}/#{_sub_2}/#{_sub_3}/#{_sub_4}/#{_sub_5}"
                                             %li
-                                              %a.productLink{ href: "#{my_shop_b_products_path}?category=#{url}" }
+                                              %a.productLink{ href: "#{products_path}?category=#{url}" }
                                               = _sub_5
         %a.exit-off-canvas
         .main
@@ -175,14 +175,14 @@
           .panel
             %ul.foot-links.inline-list
               %li
-                %a{ href: my_shop_b_about_us_path, title: 'About Us' } About Us
+                %a{ href: about_us_path, title: 'About Us' } About Us
               %li
-                %a{ href: my_shop_b_contact_us_path, title: 'Contact Us' } Contact Us
+                %a{ href: contact_us_path, title: 'Contact Us' } Contact Us
               %li
                 %a{ href: '#' }
                   &copy; 2012 IKEA, All Rights Reserved
               %li
-                %a{ href: my_shop_b_term_of_use_path } Terms of Service
+                %a{ href: term_of_use_path } Terms of Service
 
         #myModal.reveal-modal{"aria-hidden" => "true", "aria-labelledby" => "modalTitle", "data-reveal" => "", :role => "dialog"}
           #modalTitle Modal

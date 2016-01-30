@@ -9,7 +9,7 @@
             = product.product_name
 
         - if current_user
-          = link_to 'Create Order', my_shop_b_orders_path, method: 'post', class: 'button'
+          = link_to 'Create Order', orders_path, method: 'post', class: 'button'
         - else
           -#= link_to 'Create Order', '#', class: 'button', 'data-reveal-id' => 'myModal'
           = link_to 'Create Order', new_user_session_path, class: 'button'
