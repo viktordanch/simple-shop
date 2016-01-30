@@ -3,10 +3,12 @@ requirejs.config({
     jquery: 'sources/jquery/jquery',
     backbone: 'sources/backbone/backbone',
     underscore: 'sources/underscore/underscore',
-    // hbs: 'sources/hbs',
+    //hbs: 'sources/hbs',
     handlebars: 'sources/handlebars',
     text: 'sources/text',
     spinjs: 'sources/spin.min',
+    sugar: 'sources/sugar.min',
+    site_helper: 'site_helper',
     // foundation: 'sources/foundation',
     // modernizr: 'sources/modernizr',
     precompiledTemplates: 'viktor/my_shop_b/precompiledTemplates',
@@ -47,7 +49,14 @@ requirejs.config({
 });
 
 define(function(require){
-  require('spinjs');
+  var siteHelper = require('site_helper');
+  var page = 1;
+  var total_pages = 100;
+  var isLoading = false;
+  //var productsLayoutHbs = require('hbs!./templates/productsLayout');
+  var productsLayout = require('text!./templates/productsLayout.handlebars');
+  var precompiledTemplates = require('precompiledTemplates');
+  var precompiledProductsLayout = precompiledTemplates.getTemplates(productsLayout, 'list_template');
 
   function sideNav() {
     console.log('sideNav')
@@ -89,13 +98,13 @@ define(function(require){
     var $el = $(e.target);
 
     if(location.pathname.match(/\/products/)) {
-      var productsLayout = require('text!./templates/productsLayout.handlebars');
-      var precompiledTemplates = require('precompiledTemplates');
-      var precompiledProductsLayout = precompiledTemplates.getTemplates(productsLayout, 'list_template');
-
       if (!$el.is('a')) {
         return false
       } else {
+
+        var category = $el.attr('href').split('?')[1].split('=')[1];
+        history.pushState(null, null, 'products?category=' + category);
+
         $.get($el.attr('href')).then(function (data) {
           console.log(data)
           $('.productsList').html('')
@@ -104,6 +113,8 @@ define(function(require){
           var parsedDate = JSON.parse(data.responseText);
           $('.productsList').html(precompiledProductsLayout(parsedDate));
           console.log(data)
+          page = 1;
+
         }.bind(this));
       }
     } else {
@@ -124,8 +135,7 @@ define(function(require){
 
 
   // infinity scroll
-  var page = 1;
-  var isLoading = false;
+
 
   $('.main').scroll(function() {
     // Modify to adjust trigger point. You may want to add content
@@ -136,23 +146,54 @@ define(function(require){
     var isBottom = $('.main > .container').height() <= $('.main').scrollTop() + $('.main').height() + 15;
     if (isBottom && !isLoading) {
       isLoading = true;
-      $('.main .productsList').append('<div class="spinnerContainer">Loading</div>')
-      setTimeout(loadMoreContent, 2000);
-      //loadMoreContent();
+      console.log(isLoading)
+
+      //setTimeout(loadMoreContent, 2000);
+      loadMoreContent();
     }
   });
 
   function loadMoreContent() {
-    console.log('loadMoreContent');
-    isLoading = false;
-    $('.main .productsList .spinnerContainer').remove()
-    //$('.main .productsList').append($('.main .productsList').html())
-    //$.get('content.html', function(data) {
-    //  if (data != '') {
-    //    $('#content p:last').after(data);
-    //  }
-    //});
+    total_pages = total_pages == 0 ? 1000 : total_pages;
 
+    if(parseInt(page) < total_pages){
+      $('.main .productsList').append('<div class="medium-12 columns withSpinn"><div class="spinContainer">Loading</div></div>');
+      siteHelper.runSpinners($('.main .productsList'));
+      console.log('loadMoreContent');
+
+      //$('.main .productsList .spinnerContainer').remove()
+      //$('.main .productsList').append($('.main .productsList').html())
+      //$.get('content.html', function(data) {
+      //  if (data != '') {
+      //    $('#content p:last').after(data);
+      //  }
+      //});
+      var category = location.href.split('?')[1] ? location.href.split('?')[1].split('=')[1] : '';
+      page += 1;
+      $.ajax({
+        url: '/products/product_by_page?page=' + page + '&category=' + category,
+        type: 'GET',
+        success: function (data) {
+          var products = data.products;
+          total_pages = data.total;
+          isLoading = false;
+
+          console.log(page)
+          console.log(total_pages)
+
+          $('.main .productsList .withSpinn').remove();
+          $('.productsList').append(precompiledProductsLayout({ products: products }));
+        },
+        error: function (data) {
+          isLoading = false;
+          console.log('FAIL');
+          console.log(data);
+        }
+      })
+
+    } else {
+      isLoading = false;
+    }
   };
 
   var Backbone = require('backbone');

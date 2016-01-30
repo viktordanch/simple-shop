@@ -115,3 +115,11 @@ $sidebar-width: 200px;
 .productsList [class*="columns"]:last-child{
   float: left;
 }
+
+.spinContainer {
+  width: 160px;
+  height: 160px;
+  margin: 0 auto;
+  position: relative;
+  display: block;
+}

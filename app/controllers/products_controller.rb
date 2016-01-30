@@ -4,6 +4,22 @@ class ProductsController < ApplicationController
 
   respond_to :html, :json
 
+  def product_by_page
+    page = params[:page] || 1
+
+    if params[:category]
+      products = Product.where("category_path like ?", "%#{params[:category]}%").page(params[:page] || 1).per(4)
+    else
+      products = Product.page(params[:page] || 1).per(4)
+    end
+    # require 'pry'; binding.pry;
+    render json: {
+               products: products,
+               page: page,
+               total: products.num_pages
+           }
+  end
+
   def index
     @catalog = Category.catalog
     if params[:category]

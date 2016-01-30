@@ -99,7 +99,7 @@ ActiveAdmin.register_page 'Dashboard' do
     dir = File.join(Rails.root,"public","events","temp", Time.now.to_s)
     FileUtils.mkdir_p(dir)
 
-    begin
+    # begin
       Zip::File.open(zip.path).each do |entry|
         # entry is a Zip::Entry
         filename = File.join(dir,entry.name)
@@ -112,13 +112,18 @@ ActiveAdmin.register_page 'Dashboard' do
         names << filename.split('/').last
 
         product = Product.find_by_product_sku(image_name.split('.').first.split('_').first)
-        product_image = ProductImage.create!(image: p)
-        #
-        if product
-          product.product_images << product_image
-          product.save
-        else
-          no_products << image_name
+        begin
+          product_image = ProductImage.create!(image: p)
+          #
+          if product
+            product.product_images << product_image
+            product.save
+          else
+            no_products << image_name
+          end
+        rescue => ex
+          notification = notification || { alert: (notification || '') + "error to load #{ex.message}" }
+          notification[:alert] += " error to load #{ex.message}"
         end
 
         p.close
@@ -128,11 +133,11 @@ ActiveAdmin.register_page 'Dashboard' do
       zip.close
       FileUtils.remove_file(zip.path)
 
-    rescue => ex
-      notification = { alert: (notification || '') + "error to load #{ex.message}" }
-      zip.close
-      FileUtils.remove_file(zip.path)
-    end
+    # rescue => ex
+    #   notification = { alert: (notification || '') + "error to load #{ex.message}" }
+    #   zip.close
+    #   FileUtils.remove_file(zip.path)
+    # end
 
     notification = { notice: "Ok #{count} #{names.join(' ')} \n No found products: #{no_products.join(', ')}" }
 

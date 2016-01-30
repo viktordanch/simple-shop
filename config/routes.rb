@@ -14,6 +14,7 @@ Rails.application.routes.draw do
 
     resources :products, only: [:index, :show] do
       get '/list', to: 'products#list', on: :collection
+      get '/product_by_page', to: 'products#product_by_page', on: :collection
     end
   # end
   devise_for :users, controllers: { sessions: 'my_shop_b/sessions',
