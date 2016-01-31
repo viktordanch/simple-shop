@@ -5,9 +5,13 @@ class OrdersController < ApplicationController
 
   def create
     order = current_user.orders.create
-    order.products << @cart.products
-
-    @cart.products.delete_all
+    @cart.carts_products.each do |cart_product|
+      # require 'pry'; binding.pry
+      OrdersProduct.create(product_id: cart_product.product_id,
+                           order_id: order.id,
+                           count: cart_product.count.to_i)
+      cart_product.destroy
+    end
 
     redirect_to action: :index, notice: 'Order successfully created'
   end

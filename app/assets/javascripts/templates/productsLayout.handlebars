@@ -14,12 +14,15 @@
       <p>
         {{product_sku}}
       </p>
-      <p>
-        <a class="button" href="/my_shop_b/products/{{id}}">Detail</a>
-      </p>
-      <p>
-        <a class="button addToCart" data-productid="{{id}}" href="#">Add to cart</a>
-      </p>
+      <a class="button" href="/products/{{id}}">Detail</a>
+      <div class="add-section">
+        <a class="count-up" href="#"><span class="more">+</span>
+        </a>
+        <a class="count-down" href="#"><span class="less">-</span>
+        </a>
+        <input name="count" type="number" value="1">
+        <a class="button addToCart" data-productid="{{id}}" data-count="1" href="#">Add to cart</a>
+      </div>
     </div>
   </div>
 {{/each}}

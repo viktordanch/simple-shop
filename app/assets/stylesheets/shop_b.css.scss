@@ -112,6 +112,33 @@ $sidebar-width: 200px;
   overflow: auto;
 }
 
+.productsList, #product-page, #cart-page {
+    .add-section {
+      a {
+        display: inline-block;
+        vertical-align: middle;
+        &.button {
+          margin-bottom: 0;
+        }
+        .more {
+          font-size: 20px;
+          line-height: 30px;
+          font-weight: bold;
+        }
+        .less {
+          font-size: 30px;
+          line-height: 30px;
+        }
+      }
+      input {
+        width: 51px;
+        padding: 5px;
+        display: inline-block;
+        vertical-align: middle;
+        margin-bottom: 0;
+      }
+    }
+}
 .productsList [class*="columns"]:last-child{
   float: left;
 }
@@ -122,4 +149,10 @@ $sidebar-width: 200px;
   margin: 0 auto;
   position: relative;
   display: block;
+}
+
+#orders-page {
+  li.not-active {
+    opacity: 0.5;
+  }
 }

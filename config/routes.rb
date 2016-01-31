@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     resources :orders, only: [:index, :create]
     resources :cart, only: [:index] do
       post '/add_product', to: 'cart#add_product', on: :collection
+      post '/update_product_count', to: 'cart#update_product_count', on: :collection
     end
 
     resources :products, only: [:index, :show] do

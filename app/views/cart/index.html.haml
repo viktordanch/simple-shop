@@ -1,13 +1,46 @@
+- content_for :body_id do
+  cart-page
+
 .container
   %h1
     Cart
   .row
     .small-12.column
-      - if @cart.products.count > 0
-        - @cart.products.each do |product|
-          .productItem
-            = product.product_name
-
+      - if @carts_products.count > 0
+        %table
+          %thead
+            %tr
+              %th Art number
+              %th Name
+              %th Count
+              %th Price
+          %tbody
+            - @carts_products.each do |cart|
+              %tr
+                %td
+                  = cart.product_sku
+                %td
+                  = cart.product_name
+                %td
+                  -#%input{ type: 'number', value: cart.count }
+                  .add-section
+                    = link_to '#', class: 'count-up', data: { 'product-id' => cart.product_id } do
+                      %span.more +
+                    = link_to '#', class: 'count-down', data: { 'product-id' => cart.product_id } do
+                      %span.less -
+                    %input{ type: 'number', value: cart.count, name: 'count', data: { 'product-id' => cart.product_id }}
+                %td
+                  = number_to_currency(cart.product_price.to_f * cart.count.to_f,
+                                       unit: "грн", separator: ",", delimiter: "", format: "%n %u")
+            %tr
+              %td Total
+              %td
+              %td
+              %td
+                - sum = @carts_products.map { |cart| cart.product_price.to_f * cart.count.to_f }.sum
+                = number_to_currency(sum, unit: "грн", separator: ",", delimiter: "", format: "%n %u")
+              -#%td= @carts_products.inject(0).sum { |sum, cart| sum +=  cart.product.product_price.to_i * cart.count.to_i }
+              -#%td= @carts_products.count
         - if current_user
           = link_to 'Create Order', orders_path, method: 'post', class: 'button'
         - else

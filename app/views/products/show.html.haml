@@ -1,3 +1,5 @@
+- content_for :body_id do
+  product-page
 %h3= @product.product_name
 %p
   = @product.product_desc || 'No description'
@@ -9,5 +11,11 @@
   = @product.product_sku
 %p
   = @product.file_url
-%p
-  = link_to 'Add to cart', '#', class: 'button addToCart', data: { productid: @product.id }
+.add-section
+  = link_to '#', class: 'count-up' do
+    %span.more +
+  = link_to '#', class: 'count-down' do
+    %span.less -
+  %input{ type: 'number', value: 1, name: 'count'}
+  = link_to 'Add to cart', '#', class: 'button addToCart', data: { productid: @product.id, count: '1' }
+

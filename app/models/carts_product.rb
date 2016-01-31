@@ -1,5 +1,5 @@
-class OrdersProduct < ActiveRecord::Base
-  belongs_to :order
+class CartsProduct < ActiveRecord::Base
+  belongs_to :cart
   belongs_to :product
 
   delegate :product_name, to: :product, prefix: false

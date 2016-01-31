@@ -1,6 +1,10 @@
 class Product < ActiveRecord::Base
   belongs_to :category, foreign_key: :category_path, primary_key: 'category_path'
   has_many :product_images
+  has_many :carts_products
+  has_many :orders_products
+  has_many :products, through: :orders_products
+  has_many :carts, through: :carts_products
 
   def to_s
     "#{product_name} || #{product_sku}"

@@ -26,8 +26,8 @@
             = link_to 'Show more', products_path({category: category.category_path}), class: 'productLink'
 
     - @products.to_a.each do |product|
-      .medium-3.columns.product-item
-        .panel{ 'data-equalizer-watch'=>"" }
+      .medium-3.columns.product-item{ 'data-equalizer-watch'=>"" }
+        .panel
           %h3= product.product_name
           %p
             = product.product_s_desc || 'No description'
@@ -37,9 +37,13 @@
             = product.product_price
           %p
             = product.product_sku
-          %p
-            = link_to 'Detail', product_path(product), class: 'button'
-          %p
-            = link_to 'Add to cart', '#', class: 'button addToCart', data: { productid: product.id }
+          = link_to 'Detail', product_path(product), class: 'button'
+          .add-section
+            = link_to '#', class: 'count-up' do
+              %span.more +
+            = link_to '#', class: 'count-down' do
+              %span.less -
+            %input{ type: 'number', value: 1, name: 'count'}
+            = link_to 'Add to cart', '#', class: 'button addToCart', data: { productid: product.id, count: '1' }
 
   -#= paginate @products.to_a

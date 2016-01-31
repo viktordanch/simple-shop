@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160129191308) do
+ActiveRecord::Schema.define(version: 20160131160541) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(version: 20160129191308) do
   create_table "carts_products", force: :cascade do |t|
     t.integer "product_id"
     t.integer "cart_id"
+    t.integer "count"
   end
 
   add_index "carts_products", ["cart_id"], name: "index_carts_products_on_cart_id", using: :btree
@@ -80,6 +81,7 @@ ActiveRecord::Schema.define(version: 20160129191308) do
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "number"
   end
 
   add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
@@ -117,14 +119,14 @@ ActiveRecord::Schema.define(version: 20160129191308) do
     t.string   "product_sku"
     t.string   "manufacturer_name"
     t.string   "product_name"
-    t.string   "product_price"
     t.string   "published"
     t.string   "category_path"
     t.string   "file_url"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.text     "product_s_desc"
     t.string   "product_desc"
+    t.float    "product_price",     default: 0.0
   end
 
   create_table "sections", force: :cascade do |t|
@@ -140,6 +142,8 @@ ActiveRecord::Schema.define(version: 20160129191308) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean  "active"
+    t.boolean  "inited"
   end
 
   create_table "users", force: :cascade do |t|

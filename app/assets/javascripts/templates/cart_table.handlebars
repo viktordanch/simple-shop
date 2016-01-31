@@ -1,0 +1,30 @@
+{{#each carts_products}}
+  <tr>
+    <td>
+      {{art_number}}
+    </td>
+    <td>
+      {{name}}
+    </td>
+    <td>
+      <div class="add-section">
+        <a class="count-up" href="#" data-product-id="{{id}}"><span class="more">+</span>
+        </a>
+        <a class="count-down" href="#" data-product-id="{{id}}"><span class="less">-</span>
+        </a>
+        <input name="count" type="number" value="{{count}}" data-product-id="{{id}}">
+      </div>
+    </td>
+    <td>
+      {{price}}
+    </td>
+  </tr>
+{{/each}}
+<tr>
+  <td>Total</td>
+  <td></td>
+  <td></td>
+  <td>
+    {{total}}
+  </td>
+</tr>

@@ -61,9 +61,11 @@ define(function(require){
   //var productsLayoutHbs = require('hbs!./templates/productsLayout');
   var productsLayout = require('text!./templates/productsLayout.handlebars');
   var categoriesLayout = require('text!./templates/categoriesLayout.handlebars');
+  var cartTable = require('text!./templates/cart_table.handlebars');
   var precompiledTemplates = require('precompiledTemplates');
   var precompiledProductsLayout = precompiledTemplates.getTemplates(productsLayout, 'list_template');
   var precompiledCategoriesLayout = precompiledTemplates.getTemplates(categoriesLayout, 'category_list_template');
+  var precompiledCartTable = precompiledTemplates.getTemplates(cartTable, 'cartTable_template');
 
   function sideNav() {
     console.log('sideNav')
@@ -84,20 +86,21 @@ define(function(require){
   $(document).on('click', '.addToCart', function(e){
     var $el = $(e.target).is('a') ? $(e.target) : $(e.target).parents('a');
     var product_id = $el.data('productid');
+    var count = $el.data('count');
     console.log('add to cart');
     console.log(product_id);
 
     $.ajax({
-      url: '/my_shop_b/cart/add_product',
+      url: '/cart/add_product',
       type: 'POST',
-      data: { product_id: product_id }
+      data: { product_id: product_id, count: count }
     }).then(function (data) {
       console.log('success')
       console.log(data)
     }).fail(function (response) {
       console.log('fail')
       console.log(response)
-    })
+    });
     return false;
   });
 
@@ -211,6 +214,97 @@ define(function(require){
       isLoading = false;
     }
   };
+
+  // change count on catalog page
+  $(document).on('keyup change', '.productsList .add-section input, #product-page .add-section input', function (e) {
+    e.preventDefault();
+    var count = $(this).val();
+    if(isNaN(parseInt(count)) || parseInt(count) < 1){
+      count = 1;
+      $(this).val(count);
+    } else {
+      count = parseInt(count);
+    }
+    $(this).parents('.add-section').find('.addToCart').attr('data-count', count);
+  });
+
+  $(document).on('click', '.productsList .add-section .count-up, .productsList .add-section .count-down, #product-page .add-section .count-up, #product-page .add-section .count-down', function (e) {
+    e.preventDefault();
+    var $el = $(e.target).is('a') ? $(e.target) : $(e.target).parents('a');
+    var $section = $el.parents('.add-section');
+    var $input = $section.find('input');
+    var count;
+    if(isNaN(parseInt($input.val())) || parseInt($input.val()) < 1){
+      count = 1;
+    } else {
+      count = parseInt($input.val());
+    }
+    if($el.hasClass('count-up')){
+      count = count + 1;
+    }else{
+      count = count == 1 ? 1 : count - 1;
+    }
+    $input.val(count);
+    $section.find('.addToCart').attr('data-count', count);
+  });
+
+  // refresh cart js
+  var refreshCart = function (params) {
+    console.log('trye');
+    $.ajax({
+      url: '/cart/update_product_count',
+      type: 'POST',
+      data: params,
+      dataType: 'json'
+    }).then(function (response) {
+      console.log('true');
+      console.log(response)
+      $('table tbody').html(precompiledCartTable(response))
+    }).fail(function (response) {
+      console.log('false');
+      console.log(response)
+    });
+  };
+
+  $(document).on('click', '#cart-page .add-section .count-up, #cart-page .add-section .count-down', function (e) {
+    e.preventDefault();
+    var $el = $(e.target).is('a') ? $(e.target) : $(e.target).parents('a');
+    var $section = $el.parents('.add-section');
+    var $input = $section.find('input');
+    var product_id = $el.data('product-id');
+    var count;
+
+    if(isNaN(parseInt($input.val())) || parseInt($input.val()) < 1){
+      count = 1;
+    } else {
+      count = parseInt($input.val());
+    }
+
+    if($el.hasClass('count-up')){
+      count = count + 1;
+    }else{
+      count = count == 1 ? 1 : count - 1;
+    }
+
+    refreshCart({ product_id: product_id, count: count });
+  });
+
+  $(document).on('keyup change', '#cart-page .add-section input', function (e) {
+    e.preventDefault();
+    var $el = $(e.target);
+    setTimeout(function(){
+      var count = $el.val();
+      var product_id = $el.data('product-id');
+      if(isNaN(parseInt(count)) || parseInt(count) < 1){
+        count = 1;
+        $el.val(count);
+      } else {
+        count = parseInt(count);
+      }
+      refreshCart({ product_id: product_id, count: count });
+    }, 2000)
+
+  });
 
   var Backbone = require('backbone');
   var router = require('my_shop_b_router');
