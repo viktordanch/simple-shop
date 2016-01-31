@@ -58,7 +58,7 @@ ActiveAdmin.register_page 'Dashboard' do
   page_action :import_products, method: :post do
     Product.all.destroy_all if params[:total_remove]
 
-    begin
+    # begin
       message = Product.import(params[:file])
 
       if message && message[:error_row]
@@ -66,11 +66,11 @@ ActiveAdmin.register_page 'Dashboard' do
       elsif message && message[:loaded_rows_count]
         notification = { notice: "Loaded #{message[:loaded_rows_count]} products" }
       end
-    rescue => ex
-      notification = { alert: (notification || '') + "error to load #{ex.message}" }
-    end
+    # rescue => ex
+    #   notification = { alert: (notification || '') + "error to load #{ex.message}" }
+    # end
 
-    redirect_to :back, notification
+    redirect_to :back, notification || {}
   end
 
   page_action :import_products_description, method: :post do

@@ -17,8 +17,8 @@ Rails.application.routes.draw do
       get '/product_by_page', to: 'products#product_by_page', on: :collection
     end
   # end
-  devise_for :users, controllers: { sessions: 'my_shop_b/sessions',
-                                    registrations: 'my_shop_b/registrations',
-                                    confirmations: 'my_shop_b/confirmations',
-                                    passwords: 'my_shop_b/passwords' }
+  devise_for :users, controllers: { sessions: 'sessions',
+                                    registrations: 'registrations',
+                                    confirmations: 'confirmations',
+                                    passwords: 'passwords' }
 end

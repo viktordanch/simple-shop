@@ -1,6 +1,7 @@
 requirejs.config({
   paths: {
     jquery: 'sources/jquery/jquery',
+    jquery_ujs: 'sources/jquery-ujs',
     backbone: 'sources/backbone/backbone',
     underscore: 'sources/underscore/underscore',
     //hbs: 'sources/hbs',
@@ -33,6 +34,9 @@ requirejs.config({
   ],
 
   shim: {
+    jquery_ujs: {
+      deps: ['jquery']
+    },
     jquery: {
       exports: '$'
     },
@@ -49,14 +53,17 @@ requirejs.config({
 });
 
 define(function(require){
+  require('jquery_ujs');
   var siteHelper = require('site_helper');
   var page = 1;
   var total_pages = 100;
   var isLoading = false;
   //var productsLayoutHbs = require('hbs!./templates/productsLayout');
   var productsLayout = require('text!./templates/productsLayout.handlebars');
+  var categoriesLayout = require('text!./templates/categoriesLayout.handlebars');
   var precompiledTemplates = require('precompiledTemplates');
   var precompiledProductsLayout = precompiledTemplates.getTemplates(productsLayout, 'list_template');
+  var precompiledCategoriesLayout = precompiledTemplates.getTemplates(categoriesLayout, 'category_list_template');
 
   function sideNav() {
     console.log('sideNav')
@@ -94,7 +101,7 @@ define(function(require){
     return false;
   });
 
-  $(document).on('click', '.asideProductMenu .productLink, .topProductMenu .productLink', function(e){
+  $(document).on('click', '.asideProductMenu .productLink, #catalog .productLink, .topProductMenu .productLink', function(e){
     var $el = $(e.target);
 
     if(location.pathname.match(/\/products/)) {
@@ -102,18 +109,35 @@ define(function(require){
         return false
       } else {
 
-        var category = $el.attr('href').split('?')[1].split('=')[1];
+        var category = $el.attr('href').split('?')[1] ? $el.attr('href').split('?')[1].split('=')[1] : '';
         history.pushState(null, null, 'products?category=' + category);
 
         $.get($el.attr('href')).then(function (data) {
-          console.log(data)
           $('.productsList').html('')
           var precompiledProductsLayout = precompiledProductsLayout;
         }).fail(function (data) {
           var parsedDate = JSON.parse(data.responseText);
-          $('.productsList').html(precompiledProductsLayout(parsedDate));
+          var categories = parsedDate.categories;
+          var products = parsedDate.products;
+          $('.productsList').html(precompiledCategoriesLayout({ categories: categories }));
+          $('.productsList').append(precompiledProductsLayout({ products: products }));
           console.log(data)
           page = 1;
+          total_pages = 100;
+
+          var parsed_url = parsedDate.category ? parsedDate.category.split('/') : [];
+          var html_str = '<li><a class="productLink" href="/products">All</a></li>'
+          parsed_url.forEach(function(category){
+
+            var index = $.inArray(category, parsed_url);
+            console.log(index)
+            console.log(parsed_url.slice(0, index + 1).join('/'));
+            console.log(category)
+            html_str += '<li><a class="productLink" href="/products?category=' + encodeURI(parsed_url.slice(0, index + 1).join('/'))  + '">' + category + '</a></li>'
+          });
+          $('#catalog .breadcrumbs').html(html_str);
+          // prepare breadcrumbs
+          //debbugger
 
         }.bind(this));
       }
@@ -121,7 +145,7 @@ define(function(require){
       location = $el.attr('href');
     }
     return false
-  });
+  }.bind(this));
 
   $(document).ready(function(){
     sideNav();
@@ -154,20 +178,12 @@ define(function(require){
   });
 
   function loadMoreContent() {
-    total_pages = total_pages == 0 ? 1000 : total_pages;
-
-    if(parseInt(page) < total_pages){
+    var isProductsOnPage = $('.product-item').length > 0;
+    if(isProductsOnPage && parseInt(page) < total_pages){
       $('.main .productsList').append('<div class="medium-12 columns withSpinn"><div class="spinContainer">Loading</div></div>');
       siteHelper.runSpinners($('.main .productsList'));
       console.log('loadMoreContent');
 
-      //$('.main .productsList .spinnerContainer').remove()
-      //$('.main .productsList').append($('.main .productsList').html())
-      //$.get('content.html', function(data) {
-      //  if (data != '') {
-      //    $('#content p:last').after(data);
-      //  }
-      //});
       var category = location.href.split('?')[1] ? location.href.split('?')[1].split('=')[1] : '';
       page += 1;
       $.ajax({

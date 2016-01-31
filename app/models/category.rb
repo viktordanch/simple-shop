@@ -4,6 +4,23 @@ class Category < ActiveRecord::Base
     "#{category_name} || #{category_path}"
   end
 
+  def self.get_nested_categories_urls(hash)
+    s_category = hash.to_s.split('/')
+    
+    s_catalog = catalog[s_category[0]] if s_category.count == 1
+    s_catalog = catalog[s_category[0]][s_category[1]] if s_category.count == 2
+    s_catalog = catalog[s_category[0]][s_category[1]][s_category[2]] if s_category.count == 3
+    s_catalog = catalog[s_category[0]][s_category[1]][s_category[2]][s_category[3]] if s_category.count == 4
+    s_catalog = catalog[s_category[0]][s_category[1]][s_category[2]][s_category[3]][s_category[4]] if s_category.count == 5
+    s_catalog = catalog[s_category[0]][s_category[1]][s_category[2]][s_category[3]][s_category[4]][s_category[5]] if s_category.count == 6
+
+    full_urls = (s_catalog || {}).keys.map do |k|
+      hash.to_s[-1] == '/' ? (hash.to_s + k) : (hash.to_s + '/' + k)
+    end
+
+    full_urls
+  end
+
   def self.open_spreadsheet(file)
     case File.extname(file.original_filename)
       when ".csv" then Roo::CSV.new(file.path, csv_options: {col_sep: "^"})

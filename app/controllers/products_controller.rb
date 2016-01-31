@@ -8,7 +8,7 @@ class ProductsController < ApplicationController
     page = params[:page] || 1
 
     if params[:category]
-      products = Product.where("category_path like ?", "%#{params[:category]}%").page(params[:page] || 1).per(4)
+      products = Product.where(category_path: params[:category]).page(params[:page] || 1).per(4)
     else
       products = Product.page(params[:page] || 1).per(4)
     end
@@ -22,10 +22,20 @@ class ProductsController < ApplicationController
 
   def index
     @catalog = Category.catalog
-    if params[:category]
-      @products = Product.where("category_path like ?", "%#{params[:category]}%").page(params[:page] || 1).per(4)
+
+    if !params[:category].blank?
+      full_urls = Category.get_nested_categories_urls(params[:category])
+
+      @categories = Category.where(category_path: full_urls)
+
+      category = Category.where(category_path: params[:category]).first
+      if category
+        @products = Product.where("category_path = ?", "#{params[:category]}").page(params[:page] || 1).per(4)
+      end
     else
-      @products = Product.page(params[:page] || 1).per(4)
+      @categories = Category.where(category_path: @catalog.keys)
+      # @categories = Category.where("category_path = ?", "#{'Кухня/Все серии/ФАКТУМ,РАТИОНЕЛЬ серия Дверцы'}")
+      @products = []
     end
 
     # @products
@@ -33,7 +43,8 @@ class ProductsController < ApplicationController
     respond_to do |format|
       format.js {
         render json: {
-          products: @products,
+          products: @products.to_a,
+          categories: @categories,
           category: params[:category],
           page: params[:page] || 1,
         }.to_json
@@ -43,7 +54,7 @@ class ProductsController < ApplicationController
   end
 
   def show
-    @product   = Product.find_by_id(params[:id])
+    @product = Product.find_by_id(params[:id])
   end
 
   def list

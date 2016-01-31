@@ -1,5 +1,5 @@
 ActiveAdmin.register Product do
-
+  config.per_page = 100
   # filter :category_path,
   #        collection: -> { Category.all },
   #        label:      'Category'
@@ -19,16 +19,18 @@ permit_params :product_sku, :manufacturer_name,
 #   permitted
 # end
   form do |f|
-    f.inputs :product_name
-    f.inputs :manufacturer_name
-    f.inputs :product_price
-    f.inputs :published
-    f.inputs :product_sku
-    f.inputs :product_desc
-    f.inputs :product_s_desc
+    f.inputs do
+      f.input :product_name
+      f.input :manufacturer_name
+      f.input :product_price
+      f.input :published
+      f.input :product_sku
+      f.input :product_desc
+      f.input :product_s_desc
+    end
     f.inputs do
       f.input :category, label: 'category', as: :select,
-              collection: Category.all.map{|c| ["#{c.category_name}", c.category_path]}
+              collection: Category.all.sort.map{|c| ["#{c.category_path}", c.category_path]}
     end
     f.actions
   end

@@ -4,6 +4,7 @@ modules:
 paths:
   my_shop_b: my_shop_b
   jquery: 'sources/jquery/jquery'
+  jquery_ujs: 'sources/jquery-ujs'
   backbone: 'sources/backbone/backbone'
   underscore: 'sources/underscore/underscore'
   handlebars: 'sources/handlebars'
@@ -29,5 +30,7 @@ packages:
     main: 'index'
 
 shim:
+  jquery_ujs:
+    deps: ['jquery']
   backbone:
     deps: ['jquery', 'underscore']

@@ -4,20 +4,29 @@
 .container
   %ul.breadcrumbs
     %li
-      %a{ href: '#' } All
-    %li
-      %a{ href: '#' } 1
-    %li
-      %a{ href: '#' } 2
-    %li
-      %a{ href: '#' } 3
+      = link_to 'All', products_path, class: 'productLink'
+      -#%a{ href: '#' } All
+      -#= params[:category]
+    - splited_params = params[:category].to_s.split('/')
+    - splited_params.each do |category|
+      %li
+        - index =  splited_params.find_index(category)
+        - sub_path = splited_params.first(index+1).join('/')
+        = link_to category, products_path({ category: sub_path }), class: 'productLink'
   %h1
     Products
   .row.productsList{ 'data-equalizer' => '' }
     -#.small-12.column
     -#  .shopContainer
-    - @products.each do |product|
-      .medium-3.columns
+    - @categories.to_a.each do |category|
+      .medium-3.columns.category-item
+        .panel{ 'data-equalizer-watch'=>"" }
+          %h3= category.category_name
+          %p
+            = link_to 'Show more', products_path({category: category.category_path}), class: 'productLink'
+
+    - @products.to_a.each do |product|
+      .medium-3.columns.product-item
         .panel{ 'data-equalizer-watch'=>"" }
           %h3= product.product_name
           %p
@@ -33,4 +42,4 @@
           %p
             = link_to 'Add to cart', '#', class: 'button addToCart', data: { productid: product.id }
 
-  = paginate @products
+  -#= paginate @products.to_a

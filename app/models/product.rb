@@ -40,9 +40,25 @@ class Product < ActiveRecord::Base
     rows_range = (2..spreadsheet.last_row)
     rows_range.each do |i|
       row = Hash[[header, spreadsheet.row(i)].transpose]
+      product = where(row).first
+      if !product
+        product = create(row)
 
-      if where(row).blank?
-        return { error_row: row } unless create(row)
+        unless product
+          message = { error_row: row }
+        end
+
+      else
+        product.update_attributes(row)
+      end
+
+      path_arr = product.category_path.to_s.split('/')
+      path_arr.each do |category_name|
+        index = path_arr.find_index(category_name)
+        c_path = path_arr.take(index + 1).join('/')
+        category= Category.find_by_category_path(c_path)
+        Category.create({ category_name: category_name, category_path: c_path }) if !category
+        # p category
       end
     end
 
