@@ -16,7 +16,8 @@ permit_params :user_id,
 # end
   form do |f|
     f.inputs 'Edit' do
-      f.input :products, as: :select, html: { multipart: true }, collection: Product.all
+      # f.input :products, as: :select, html: { multipart: true }, collection: Product.all
+      f.input :products, :input_html => { :class => "chosen-input" } # other model with has_many relation ship
       f.input :statuses, as: :check_boxes, collection: Status.all
       f.input :user, :as => :select
     end

@@ -68,6 +68,8 @@ gem 'aws-sdk', '< 2.0'
 
 gem 'rubyzip', '~> 1.1', '>= 1.1.7'
 
+gem 'chosen-rails', '~> 1.4', '>= 1.4.3'
+
 group :test, :development do
   # code style
   gem 'brakeman', require: false
