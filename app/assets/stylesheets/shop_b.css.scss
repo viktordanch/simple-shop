@@ -2,6 +2,7 @@
 @import "foundation-icons/foundation-icons.css";
 @import "foundation.css";
 @import "viktor/layout";
+@import "token-input";
 
 .row {
   max-width: 1600px;
@@ -155,4 +156,26 @@ $sidebar-width: 200px;
   li.not-active {
     opacity: 0.5;
   }
+}
+
+.withTokenInput {
+  width: 240px;
+  .token-input-list {
+    border: none;
+    position: relative;
+    top: 0.53125rem;
+    width: 100%;
+    .token-input-token {
+      width: 100%;
+      background: #fff;
+      margin: 0;
+    }
+    .token-input-input-token {
+      width: 100%;
+      background: #fff;
+    }
+  }
+}
+.token-input-dropdown {
+  z-index: 10000 !important;
 }

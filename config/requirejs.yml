@@ -5,6 +5,7 @@ paths:
   my_shop_b: my_shop_b
   jquery: 'sources/jquery/jquery'
   jquery_ujs: 'sources/jquery-ujs'
+  tokeninput: 'sources/jquery.tokeninput'
   backbone: 'sources/backbone/backbone'
   underscore: 'sources/underscore/underscore'
   handlebars: 'sources/handlebars'
@@ -34,3 +35,9 @@ shim:
     deps: ['jquery']
   backbone:
     deps: ['jquery', 'underscore']
+  jquery:
+    exports: '$'
+  underscore:
+    exports: '_'
+  tokeninput:
+     deps: ['jquery']

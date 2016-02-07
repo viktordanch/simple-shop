@@ -9,6 +9,7 @@ requirejs.config({
     text: 'sources/text',
     spinjs: 'sources/spin.min',
     sugar: 'sources/sugar.min',
+    tokeninput: 'sources/jquery.tokeninput',
     site_helper: 'site_helper',
     // foundation: 'sources/foundation',
     // modernizr: 'sources/modernizr',
@@ -46,14 +47,15 @@ requirejs.config({
     backbone: {
       deps: ['jquery', 'underscore']
     },
-    // foundation: {
-    //   deps: ['jquery', 'modernizr']
-    // }
+    tokeninput: {
+       deps: ['jquery']
+     }
   }
 });
 
 define(function(require){
   require('jquery_ujs');
+  require('tokeninput');
   var siteHelper = require('site_helper');
   var page = 1;
   var total_pages = 100;
@@ -157,6 +159,17 @@ define(function(require){
       var icon = $(this).parent().next(".off-canvas-submenu").is(':visible') ? '+' : '-';
       $(this).parent().next(".off-canvas-submenu").slideToggle('fast');
       $(this).find("span").text(icon);
+    });
+
+    $(".hot-search").tokenInput("/products/search",{
+      tokenLimit: 1,
+      hintText: 'Type producr',
+      noResultsText: 'Not found product',
+      searchingText: 'Looking for ...',
+      //placeholder: 'Find product...',
+      //tokenLimit: 5,
+      preventDuplicates: true,
+      //queryParam: 'query'
     });
   });
 
@@ -305,6 +318,10 @@ define(function(require){
     }, 2000)
 
   });
+
+  // select2 ajax
+
+
 
   var Backbone = require('backbone');
   var router = require('my_shop_b_router');

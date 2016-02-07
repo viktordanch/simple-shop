@@ -62,9 +62,10 @@
           %ul.left
             / Search | has-form wrapper
             %li.has-form
-              .row.collapse
-                .large-10.small-10.columns
-                  %input{ placeholder: 'Find Stuff', type: 'text' }
+              .row.collapse.withTokenInput
+                .large-10.smtall-10.columns
+                  %input.hot-search{ placeholder: '', type: 'text' }
+
                 .large-2.small-2.columns
                   %a.primary.button.expand{ href: '#' }
                     %i.fi-magnifying-glass

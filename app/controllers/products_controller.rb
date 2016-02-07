@@ -4,6 +4,14 @@ class ProductsController < ApplicationController
 
   respond_to :html, :json
 
+  def search
+    param = params[:q]
+    products = Product.where('product_sku like (?) OR product_name like (?) OR manufacturer_name like (?)',
+                  "%#{param}%", "%#{param}%", "%#{param}%").first(5)
+    response = products.map { |product| { id: product.id, name: "#{product.product_sku}; #{product.product_name}"}}
+    render json: response.to_json
+  end
+
   def product_by_page
     page = params[:page] || 1
 
