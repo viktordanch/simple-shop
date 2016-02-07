@@ -67,14 +67,17 @@
                   %input.hot-search{ placeholder: '', type: 'text' }
 
                 .large-2.small-2.columns
-                  %a.primary.button.expand{ href: '#' }
+                  %a.primary.button.expand.go-to-product{ href: '#' }
                     %i.fi-magnifying-glass
 
           / Top Bar Right Nav Elements
           %ul.right.topProductMenu
             %li.divider
             %li
-              %a{ href: cart_index_path, title: 'My Cart' } My Cart
+              %a{ href: cart_index_path, title: 'My Cart', class: 'cart_link' }
+                My Cart
+                %span{ class: 'badge'}
+                  1
             %li.divider
             %li
               %a{ href: orders_path, title: 'My Orders' } My Orders

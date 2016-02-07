@@ -8,7 +8,11 @@ requirejs.config({
     handlebars: 'sources/handlebars',
     text: 'sources/text',
     spinjs: 'sources/spin.min',
+    tweenMax: 'sources/TweenMax.min',
+    timelineMax: 'sources/TimelineMax.min',
+    tweenLite: 'sources/TweenLite.min',
     sugar: 'sources/sugar.min',
+    gsap: 'sources/jquery.gsap.min',
     tokeninput: 'sources/jquery.tokeninput',
     site_helper: 'site_helper',
     // foundation: 'sources/foundation',
@@ -54,6 +58,12 @@ requirejs.config({
 });
 
 define(function(require){
+  require('tweenMax');
+  require('tweenLite');
+  require('timelineMax');
+
+
+
   require('jquery_ujs');
   require('tokeninput');
   var siteHelper = require('site_helper');
@@ -88,17 +98,19 @@ define(function(require){
   $(document).on('click', '.addToCart', function(e){
     var $el = $(e.target).is('a') ? $(e.target) : $(e.target).parents('a');
     var product_id = $el.data('productid');
-    var count = $el.data('count');
-    console.log('add to cart');
-    console.log(product_id);
+    var count = parseInt($el.parents('.add-section').find('input').val()) || 1;
 
     $.ajax({
       url: '/cart/add_product',
       type: 'POST',
       data: { product_id: product_id, count: count }
     }).then(function (data) {
-      console.log('success')
-      console.log(data)
+      var $badge = $('.cart_link .badge');
+      $badge.show();
+      $badge.html(data.count);
+      var t1 = new TimelineMax();
+      t1.to('.cart_link .badge', 0.25, { scale: 1.25 })
+          .to('.cart_link .badge', 0.25, { scale: 1 });
     }).fail(function (response) {
       console.log('fail')
       console.log(response)
@@ -133,16 +145,11 @@ define(function(require){
           var parsed_url = parsedDate.category ? parsedDate.category.split('/') : [];
           var html_str = '<li><a class="productLink" href="/products">All</a></li>'
           parsed_url.forEach(function(category){
-
             var index = $.inArray(category, parsed_url);
-            console.log(index)
-            console.log(parsed_url.slice(0, index + 1).join('/'));
-            console.log(category)
-            html_str += '<li><a class="productLink" href="/products?category=' + encodeURI(parsed_url.slice(0, index + 1).join('/'))  + '">' + category + '</a></li>'
+            html_str += '<li><a class="productLink" href="/products?category=' +
+                encodeURI(parsed_url.slice(0, index + 1).join('/'))  + '">' + category + '</a></li>'
           });
           $('#catalog .breadcrumbs').html(html_str);
-          // prepare breadcrumbs
-          //debbugger
 
         }.bind(this));
       }
@@ -166,10 +173,7 @@ define(function(require){
       hintText: 'Type producr',
       noResultsText: 'Not found product',
       searchingText: 'Looking for ...',
-      //placeholder: 'Find product...',
-      //tokenLimit: 5,
       preventDuplicates: true,
-      //queryParam: 'query'
     });
   });
 
@@ -257,7 +261,7 @@ define(function(require){
     }else{
       count = count == 1 ? 1 : count - 1;
     }
-    $input.val(count);
+    $input.attr('value', count);
     $section.find('.addToCart').attr('data-count', count);
   });
 
@@ -319,9 +323,12 @@ define(function(require){
 
   });
 
-  // select2 ajax
-
-
+  $(document).on('click', '.go-to-product', function(){
+    var id = parseInt($('.top-bar .hot-search').val());
+    if(parseInt(id)) {
+      location = '/products/' + id;
+    }
+  })
 
   var Backbone = require('backbone');
   var router = require('my_shop_b_router');

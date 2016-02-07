@@ -179,3 +179,37 @@ $sidebar-width: 200px;
 .token-input-dropdown {
   z-index: 10000 !important;
 }
+
+.an_span {
+  display: inline-block;
+  vertical-align: middle;
+  width: 150px;
+}
+.box {
+  width: 100px;
+  height: 100px;
+  display: inline-block;
+  vertical-align: middle;
+  margin: 20px;
+  background-color: green;
+}
+.cart_link {
+  position: relative;
+  .badge {
+    font-size: 12px;
+    display: block;
+    background-color: #007095;
+    height: 21px;
+    width: 21px;
+    line-height: 21px;
+    color: #fff;
+    margin: initial;
+    text-align: center;
+    border-radius: 9px;
+    margin-left: 5px;
+    margin-bottom: -2px;
+    position: absolute;
+    top: 29px;
+    right: 0;
+  }
+}

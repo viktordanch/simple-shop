@@ -17,7 +17,7 @@ class CartController < ApplicationController
         CartsProduct.create(cart_id: @cart.id, product_id: product.id, count: count)
       end
 
-      render json: { message: 'product added' }.to_json
+      render json: { message: 'product added', count: @cart.carts_products.sum(:count) }.to_json
     else
       render json: { message: 'product not found' }.to_json, status: 404
     end
