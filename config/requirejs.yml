@@ -9,6 +9,8 @@ paths:
   backbone: 'sources/backbone/backbone'
   underscore: 'sources/underscore/underscore'
   handlebars: 'sources/handlebars'
+  sugar: 'sources/sugar.min'
+  spinjs: 'sources/spin.min'
   text: 'sources/text'
   precompiledTemplates: 'viktor/my_shop_b/precompiledTemplates'
   my_shop_b_router: 'viktor/my_shop_b/router'

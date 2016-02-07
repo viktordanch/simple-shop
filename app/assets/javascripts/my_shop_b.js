@@ -70,7 +70,7 @@ define(function(require){
   var precompiledCartTable = precompiledTemplates.getTemplates(cartTable, 'cartTable_template');
 
   function sideNav() {
-    console.log('sideNav')
+    console.log('sideNav');
     console.log($(window).width() < 769);
     if ($(window).width() < 769) {
       $('.off-canvas-wrap').removeClass('move-right');
