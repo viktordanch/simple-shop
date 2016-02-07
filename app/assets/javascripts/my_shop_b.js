@@ -10,7 +10,7 @@ requirejs.config({
     spinjs: 'sources/spin.min',
     tweenMax: 'sources/TweenMax.min',
     timelineMax: 'sources/TimelineMax.min',
-    tweenLite: 'sources/TweenLite.min',
+    TweenLite: 'sources/TweenLite.min',
     sugar: 'sources/sugar.min',
     gsap: 'sources/jquery.gsap.min',
     tokeninput: 'sources/jquery.tokeninput',
@@ -53,14 +53,17 @@ requirejs.config({
     },
     tokeninput: {
        deps: ['jquery']
-     }
+     },
+    timelineMax: {
+      deps: ['TweenLite']
+    }
   }
 });
 
 define(function(require){
-  require('tweenMax');
-  require('tweenLite');
-  require('timelineMax');
+  var TweenMax = require('tweenMax');
+  var TweenLite = require('TweenLite');
+  var TimelineMax = require('timelineMax');
 
 
 

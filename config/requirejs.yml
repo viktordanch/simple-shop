@@ -13,7 +13,7 @@ paths:
   spinjs: 'sources/spin.min'
   tweenMax: 'sources/TweenMax.min'
   timelineMax: 'sources/TimelineMax.min'
-  tweenLite: 'sources/TweenLite.min'
+  TweenLite: 'sources/TweenLite.min'
   text: 'sources/text'
   precompiledTemplates: 'viktor/my_shop_b/precompiledTemplates'
   my_shop_b_router: 'viktor/my_shop_b/router'
@@ -46,3 +46,5 @@ shim:
     exports: '_'
   tokeninput:
      deps: ['jquery']
+  timelineMax:
+     deps: ['TweenLite']
