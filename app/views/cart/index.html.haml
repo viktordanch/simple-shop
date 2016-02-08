@@ -2,10 +2,12 @@
   cart-page
 
 .container
-  %h1
-    Cart
   .row
     .small-12.column
+      %h1
+        Cart
+  .row
+    .small-12.column.page-content
       - if @carts_products.count > 0
         %table
           %thead
@@ -14,6 +16,7 @@
               %th Name
               %th Count
               %th Price
+              %th
           %tbody
             - @carts_products.each do |cart|
               %tr
@@ -32,6 +35,11 @@
                 %td
                   = number_to_currency(cart.product_price.to_f * cart.count.to_f,
                                        unit: "грн", separator: ",", delimiter: "", format: "%n %u")
+                %td
+                  = link_to cart_path(cart, { product_id: cart.product_id }), class: 'remove-product',
+                                             data: { 'product-id' => cart.product_id } do
+                    %span.remove
+                      Remove
             %tr
               %td Total
               %td
@@ -39,8 +47,7 @@
               %td
                 - sum = @carts_products.map { |cart| cart.product_price.to_f * cart.count.to_f }.sum
                 = number_to_currency(sum, unit: "грн", separator: ",", delimiter: "", format: "%n %u")
-              -#%td= @carts_products.inject(0).sum { |sum, cart| sum +=  cart.product.product_price.to_i * cart.count.to_i }
-              -#%td= @carts_products.count
+              %td
         - if current_user
           = link_to 'Create Order', orders_path, method: 'post', class: 'button'
         - else
@@ -48,4 +55,5 @@
           = link_to 'Create Order', new_user_session_path, class: 'button'
 
       - else
-        Cart is empty
+        %p
+          Your cart is empty

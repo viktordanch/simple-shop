@@ -18,6 +18,14 @@
     <td>
       {{price}}
     </td>
+    <td>
+      <a class="remove-product" data-product-id="{{id}}" rel="nofollow"
+         href="/cart/{{id}}?product_id={{id}}">
+        <span class="remove">
+          Remove
+        </span>
+      </a>
+    </td>
   </tr>
 {{/each}}
 <tr>
@@ -27,4 +35,5 @@
   <td>
     {{total}}
   </td>
+  <td></td>
 </tr>

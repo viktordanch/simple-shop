@@ -76,8 +76,11 @@
             %li
               %a{ href: cart_index_path, title: 'My Cart', class: 'cart_link' }
                 My Cart
-                %span{ class: 'badge'}
-                  1
+                - if @cart.product_count > 0
+                  %span{ class: 'badge'}
+                    = @cart.product_count
+                - else
+                  %span{ class: 'badge empty'}
             %li.divider
             %li
               %a{ href: orders_path, title: 'My Orders' } My Orders

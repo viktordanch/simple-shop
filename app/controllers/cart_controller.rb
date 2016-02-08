@@ -17,7 +17,7 @@ class CartController < ApplicationController
         CartsProduct.create(cart_id: @cart.id, product_id: product.id, count: count)
       end
 
-      render json: { message: 'product added', count: @cart.carts_products.sum(:count) }.to_json
+      render json: { message: 'product added', count: @cart.product_count }.to_json
     else
       render json: { message: 'product not found' }.to_json, status: 404
     end
@@ -32,8 +32,8 @@ class CartController < ApplicationController
     cart_product = CartsProduct.where(cart_id: @cart.id, product_id: product_id).first
 
     cart_product.update_attributes(count: count) if cart_product
-
-    @carts_products = @cart.carts_products.all
+    # require 'pry'; binding.pry
+    @carts_products = @cart.carts_products.all.sort_by{ |e| e.product_name }
 
     total_price = @carts_products.map { |cart| cart.product_price.to_f * cart.count.to_f }.sum
     render json: {
@@ -53,12 +53,14 @@ class CartController < ApplicationController
                                          unit: "грн",
                                          separator: ",",
                                          delimiter: "",
-                                         format: "%n %u")
+                                         format: "%n %u"),
+               total_count: @cart.product_count
            }.to_json
   end
 
   def index
     @carts_products = @cart.carts_products.all
+    @carts_products = @cart.carts_products.all.sort_by{ |e| e.product_name }
     respond_to do |format|
       format.js {
         total_price = @carts_products.map { |cart| cart.product_price.to_f * cart.count.to_f }.sum
@@ -81,6 +83,26 @@ class CartController < ApplicationController
                                              format: "%n %u")
                }.to_json }
       format.html
+    end
+  end
+
+  def destroy
+    cart_product = CartsProduct.where(product_id: params[:product_id], cart_id: @cart.id).first
+
+    if cart_product && cart_product.destroy
+      respond_to do |format|
+        format.js { render json: { message: 'removed', count: @cart.product_count } }
+        format.html {
+          redirect_to :back
+        }
+      end
+    else
+      respond_to do |format|
+        format.js { render json: { message: 'error' }, status: 401 }
+        format.html {
+          redirect_to :back
+        }
+      end
     end
   end
 end

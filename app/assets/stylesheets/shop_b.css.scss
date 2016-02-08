@@ -211,5 +211,8 @@ $sidebar-width: 200px;
     position: absolute;
     top: 29px;
     right: 0;
+    &.empty {
+      display: none;
+    }
   }
 }

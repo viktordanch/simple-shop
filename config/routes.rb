@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     get '/contact_us', to: 'index#contact_us'
     get '/term_of_use', to: 'index#term_of_use'
     resources :orders, only: [:index, :create]
-    resources :cart, only: [:index] do
+    resources :cart, only: [:index, :destroy] do
       post '/add_product', to: 'cart#add_product', on: :collection
       post '/update_product_count', to: 'cart#update_product_count', on: :collection
     end

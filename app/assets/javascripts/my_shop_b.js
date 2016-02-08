@@ -61,14 +61,12 @@ requirejs.config({
 });
 
 define(function(require){
-  var TweenMax = require('tweenMax');
-  var TweenLite = require('TweenLite');
-  var TimelineMax = require('timelineMax');
-
-
-
+  require('tweenMax');
+  require('TweenLite');
+  require('timelineMax');
   require('jquery_ujs');
   require('tokeninput');
+
   var siteHelper = require('site_helper');
   var page = 1;
   var total_pages = 100;
@@ -108,15 +106,9 @@ define(function(require){
       type: 'POST',
       data: { product_id: product_id, count: count }
     }).then(function (data) {
-      var $badge = $('.cart_link .badge');
-      $badge.show();
-      $badge.html(data.count);
-      var t1 = new TimelineMax();
-      t1.to('.cart_link .badge', 0.25, { scale: 1.25 })
-          .to('.cart_link .badge', 0.25, { scale: 1 });
+        updateTopCartCount(data.count);
     }).fail(function (response) {
       console.log('fail')
-      console.log(response)
     });
     return false;
   });
@@ -277,8 +269,7 @@ define(function(require){
       data: params,
       dataType: 'json'
     }).then(function (response) {
-      console.log('true');
-      console.log(response)
+      updateTopCartCount(response.total_count);
       $('table tbody').html(precompiledCartTable(response))
     }).fail(function (response) {
       console.log('false');
@@ -331,7 +322,46 @@ define(function(require){
     if(parseInt(id)) {
       location = '/products/' + id;
     }
-  })
+  });
+
+  $(document).on('click', '.remove-product', function(e){
+    e.preventDefault();
+    e.stopPropagation();
+
+    var $el = $(e.target).is('a') ? $(e.target) : $(e.target).closest('a');
+    var url = $el.attr('href');
+    $.ajax({
+      url: url,
+      type: 'DELETE',
+      dataType: 'json',
+      success: function (data) {
+        updateTopCartCount(data.count);
+        if ($el.parents('table').find('tbody tr').length <= 2){
+          $('.page-content').html("<p>Your cart is empty</p>");
+        } else {
+          $el.parents('tr').fadeOut();
+          $el.parents('tr').remove();
+        }
+      },
+      error: function (data) {
+        console.log('error');
+      }
+    });
+
+    return false;
+  });
+  var updateTopCartCount = function (count) {
+    var $badge = $('.cart_link .badge');
+    if (count > 0) {
+      $badge.html(count);
+      $badge.show();
+      var t1 = new TimelineMax();
+      t1.to('.cart_link .badge', 0.25, {scale: 1.25})
+          .to('.cart_link .badge', 0.25, {scale: 1});
+    } else {
+      $badge.hide();
+    }
+  };
 
   var Backbone = require('backbone');
   var router = require('my_shop_b_router');
