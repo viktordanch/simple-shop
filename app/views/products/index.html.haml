@@ -16,8 +16,6 @@
   %h1
     Products
   .row.productsList{ 'data-equalizer' => '' }
-    -#.small-12.column
-    -#  .shopContainer
     - @categories.to_a.each do |category|
       .medium-3.columns.category-item
         .panel{ 'data-equalizer-watch'=>"" }
@@ -26,8 +24,8 @@
             = link_to 'Show more', products_path({category: category.category_path}), class: 'productLink'
 
     - @products.to_a.each do |product|
-      .medium-3.columns.product-item{ 'data-equalizer-watch'=>"" }
-        .panel
+      .medium-3.columns.product-item
+        .panel{ 'data-equalizer-watch'=>"" }
           %h3= product.product_name
           %p
             = product.product_s_desc || 'No description'
@@ -37,7 +35,7 @@
             = product.product_price
           %p
             = product.product_sku
-          = link_to 'Detail', product_path(product), class: 'button'
+          = link_to 'Detail', product_path(product), class: ''
           .add-section
             = link_to '#', class: 'count-up' do
               %span.more +

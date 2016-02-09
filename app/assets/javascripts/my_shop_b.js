@@ -15,11 +15,10 @@ requirejs.config({
     gsap: 'sources/jquery.gsap.min',
     tokeninput: 'sources/jquery.tokeninput',
     site_helper: 'site_helper',
-    // foundation: 'sources/foundation',
+    foundation_min: 'sources/foundation.min',
     // modernizr: 'sources/modernizr',
     precompiledTemplates: 'viktor/my_shop_b/precompiledTemplates',
     my_shop_b_router: 'viktor/my_shop_b/router',
-    foundation_setup: 'viktor/foundation_setup',
     my_shop_b_controller: 'viktor/my_shop_b/controller',
     my_shop_b_base_view: 'viktor/my_shop_b/base/baseView',
     my_shop_b_base_model: 'viktor/my_shop_b/base/baseModel',
@@ -39,6 +38,9 @@ requirejs.config({
   ],
 
   shim: {
+    foundation_min: {
+      deps: ['jquery']
+    },
     jquery_ujs: {
       deps: ['jquery']
     },
@@ -61,11 +63,16 @@ requirejs.config({
 });
 
 define(function(require){
+  require('foundation_min');
   require('tweenMax');
   require('TweenLite');
   require('timelineMax');
   require('jquery_ujs');
   require('tokeninput');
+
+  $(function () {
+    $(document).foundation();
+  });
 
   var siteHelper = require('site_helper');
   var page = 1;

@@ -35,7 +35,7 @@ html, body, .off-canvas-wrap, .inner-wrap, .main {
   }
 }
 
-header {
+header#topHeader {
   //margin-left: -200px;
   z-index: 10000;
   position: fixed;
@@ -215,4 +215,8 @@ $sidebar-width: 200px;
       display: none;
     }
   }
+}
+
+.row.product-page {
+  background-color: #EDEFF0;
 }

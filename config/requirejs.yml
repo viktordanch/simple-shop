@@ -15,6 +15,7 @@ paths:
   timelineMax: 'sources/TimelineMax.min'
   TweenLite: 'sources/TweenLite.min'
   text: 'sources/text'
+  foundation_min: 'sources/foundation.min'
   precompiledTemplates: 'viktor/my_shop_b/precompiledTemplates'
   my_shop_b_router: 'viktor/my_shop_b/router'
   my_shop_b_controller: 'viktor/my_shop_b/controller'
@@ -36,6 +37,8 @@ packages:
     main: 'index'
 
 shim:
+  foundation_min:
+    deps: ['jquery']
   jquery_ujs:
     deps: ['jquery']
   backbone:

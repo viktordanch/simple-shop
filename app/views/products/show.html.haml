@@ -19,3 +19,179 @@
   %input{ type: 'number', value: 1, name: 'count'}
   = link_to 'Add to cart', '#', class: 'button addToCart', data: { productid: @product.id, count: '1' }
 
+%section.row.product-page
+  .columns.medium-6.small-12
+    row 1
+  .columns.medium-6.small-12
+    row 2
+    -#.content-under.product-gallery.position-bottom.location-outside.image-ratio-3-2.navigation-thumbnails{"alt-text" => "mainVM.productData.name", "data-hook" => "product-gallery", "image-ratio" => "true", :media => "mainVM.productData.media", "ng-class" => "[galleryVM.getNavigationPositionClass(), galleryVM.getNavigationLocationClass(),\r\n      galleryVM.getImageRatioClass(), galleryVM.getNavigationTypeClass(), galleryVM.getNoNavigationClass()]", :zoom => "true"}
+  -#    .main-media.product-media-container.image-mode-crop{"alt-text" => "galleryVM.altText", "data-hook" => "main-media", "image-mode" => "galleryVM.settings.gallery.imageMode", "image-ratio" => "galleryVM.getMainImageRatio()", :media => "galleryVM.media", "navigation-type" => "galleryVM.getNavigationType()", "ng-class" => "[mainMediaVM.getImageModeClass()]", "selected-index" => "galleryVM.selectedIndex", "swipe-to-scroll" => "galleryVM.swipeToScroll", :zoom => "galleryVM.zoom"}
+  -#      / ngIf: mainMediaVM.media.length
+  -#      %slick.main-media-carousel.slick-initialized.slick-slider{"data-hook" => "product-page-media-item", :infinite => "false", "ng-if" => "mainMediaVM.media.length", :settings => "mainMediaVM.slickOptions", "slides-to-scroll" => "1", "slides-to-show" => "1", :speed => "400", :style => "display: block;"}
+  -#        / ngRepeat: media in mainMediaVM.media
+  -#        .slick-list{"aria-live" => "polite"}
+  -#          .slick-track{:role => "listbox", :style => "opacity: 1; width: 996px;"}
+  -#            .slick-slide.slick-current.slick-active{"aria-describedby" => "slick-slide00", "aria-hidden" => "false", "data-slick-index" => "0", "ng-repeat" => "media in mainMediaVM.media", :role => "option", :style => "width: 498px; position: relative; left: 0px; top: 0px; z-index: 999; opacity: 1;", :tabindex => "0"}
+  -#              %a#magic-zoom-0.media-trigger.MagicZoom{:href => "http://static.wixstatic.com/media/84770f_5011d2326c0b42689dd15646828c36dd.png_srz_p_1821_1214_75_22_0.5_1.2_0_png_srz", "is-active" => "true", "magic-zoom" => "http://static.wixstatic.com/media/84770f_5011d2326c0b42689dd15646828c36dd.png_srz_p_1821_1214_75_22_0.5_1.2_0_png_srz", :style => "position: relative; display: inline-block; text-decoration: none; outline: 0px; overflow: hidden; cursor: pointer; width: auto; height: auto;", :tabindex => "0", :title => ""}
+  -#                %img.media{:alt => "ВАШ ТОВАР", "data-hook" => "product-page-media", "ng-src" => "http://static.wixstatic.com/media/84770f_5011d2326c0b42689dd15646828c36dd.png_srz_p_500_333_75_22_0.5_1.2_0_png_srz", :src => "http://static.wixstatic.com/media/84770f_5011d2326c0b42689dd15646828c36dd.png_srz_p_500_333_75_22_0.5_1.2_0_png_srz", :style => "opacity: 1;"}/
+  -#                .MagicZoomPlusLoading{:style => "opacity: 0.75; display: none; overflow: hidden; position: absolute; visibility: hidden; z-index: 20; max-width: 494px; left: 249px; top: 165.5px;"} Loading zoom...
+  -#                .MagicZoomBigImageCont.inner-zoom{:style => "overflow: hidden; z-index: 100; top: -100000px; position: absolute; width: 100%; height: 100%; left: 0px; opacity: 0;"}
+  -#                  .MagicZoomHeader{:style => "position: relative; z-index: 10; left: 0px; top: 0px; padding: 3px; display: none; visibility: hidden;"}
+  -#                  %div{:style => "overflow: hidden;"}
+  -#                    %img{:src => "http://static.wixstatic.com/media/84770f_5011d2326c0b42689dd15646828c36dd.png_srz_p_1821_1214_75_22_0.5_1.2_0_png_srz", :style => "padding: 0px; margin: 0px; border: 0px; width: auto; height: auto; position: relative; left: -651.75px; top: -216.75px;"}/
+  -#                .MagicZoomPup{:style => "z-index: 10; position: absolute; overflow: hidden; display: none; visibility: hidden; width: 134px; height: 88px; opacity: 0.5; left: 0px; top: 14px;"}
+  -#            .slick-slide{"aria-describedby" => "slick-slide01", "aria-hidden" => "true", "data-slick-index" => "1", "ng-repeat" => "media in mainMediaVM.media", :role => "option", :style => "width: 498px; position: relative; left: -498px; top: 0px; z-index: 998; opacity: 0;", :tabindex => "-1"}
+  -#              %a#magic-zoom-1.media-trigger{"is-active" => "false", "magic-zoom" => "http://static.wixstatic.com/media/84770f_ac9e70d726634e089a1aaee093978a1a.png_srz_p_1821_1214_75_22_0.5_1.2_0_png_srz", :tabindex => "-1"}
+  -#                %img.media{:alt => "ВАШ ТОВАР", "data-hook" => "product-page-media", "ng-src" => "http://static.wixstatic.com/media/84770f_ac9e70d726634e089a1aaee093978a1a.png_srz_p_500_333_75_22_0.5_1.2_0_png_srz", :src => "http://static.wixstatic.com/media/84770f_ac9e70d726634e089a1aaee093978a1a.png_srz_p_500_333_75_22_0.5_1.2_0_png_srz"}/
+  -#      / end ngRepeat: media in mainMediaVM.media
+  -#      / end ngRepeat: media in mainMediaVM.media
+  -#      / end ngIf: mainMediaVM.media.length
+  -#      / ngIf: !mainMediaVM.media.length
+  -#      / ngIf: ::mainMediaVM.zoom && mainMediaVM.media.length
+  -#      %i.zoom-hint.glyphicon-zoom{"data-hook" => "zoom-icon", "ng-if" => "::mainMediaVM.zoom && mainMediaVM.media.length"}
+  -#    / end ngIf: ::mainMediaVM.zoom && mainMediaVM.media.length
+  -#    / ngIf: galleryVM.isThumbnailsActive()
+  -#    .thumbnails{"alt-text" => "galleryVM.altText", "data-hook" => "thumbnails", :media => "galleryVM.media", "ng-class" => "{ 'has-nav': thumbnailsVM.hasNav() }", "ng-if" => "galleryVM.isThumbnailsActive()", "selected-index" => "galleryVM.selectedIndex"}
+  -#      %slick.thumbnails-carousel.slick-carousel.slick-initialized.slick-slider{:arrows => "false", "data-hook" => "product-page-thumbnails", "focus-on-select" => "true", :infinite => "false", :settings => "thumbnailsVM.slickOptions", "slides-to-scroll" => "1", "slides-to-show" => "4", :speed => "400", :style => "display: block; width: 120px;", :swipe => "false", "swipe-to-slide" => "false"}
+  -#        / ngRepeat: media in thumbnailsVM.media
+  -#        .slick-list.draggable{"aria-live" => "polite"}
+  -#          .slick-track{:role => "listbox", :style => "opacity: 1; width: 120px; transform: translate3d(0px, 0px, 0px);"}
+  -#            .slick-slide.slick-current.slick-active{"aria-describedby" => "slick-slide10", "aria-hidden" => "false", "data-slick-index" => "0", "ng-repeat" => "media in thumbnailsVM.media", :role => "option", :style => "width: 60px;", :tabindex => "0"}
+  -#              %a.thumbnails-trigger{"data-hook" => "product-page-thumbnails-trigger", "ng-click" => "thumbnailsVM.setSelected($index)", :tabindex => "0"}
+  -#                %img.thumbnails-media{:alt => "ВАШ ТОВАР", "data-hook" => "product-page-thumbnails-media", "ng-src" => "http://static.wixstatic.com/media/84770f_5011d2326c0b42689dd15646828c36dd.png_srz_p_45_45_75_22_0.5_1.2_0_png_srz", :src => "http://static.wixstatic.com/media/84770f_5011d2326c0b42689dd15646828c36dd.png_srz_p_45_45_75_22_0.5_1.2_0_png_srz"}/
+  -#            .slick-slide.slick-active{"aria-describedby" => "slick-slide11", "aria-hidden" => "false", "data-slick-index" => "1", "ng-repeat" => "media in thumbnailsVM.media", :role => "option", :style => "width: 60px;", :tabindex => "0"}
+  -#              %a.thumbnails-trigger{"data-hook" => "product-page-thumbnails-trigger", "ng-click" => "thumbnailsVM.setSelected($index)", :tabindex => "0"}
+  -#                %img.thumbnails-media{:alt => "ВАШ ТОВАР", "data-hook" => "product-page-thumbnails-media", "ng-src" => "http://static.wixstatic.com/media/84770f_ac9e70d726634e089a1aaee093978a1a.png_srz_p_45_45_75_22_0.5_1.2_0_png_srz", :src => "http://static.wixstatic.com/media/84770f_ac9e70d726634e089a1aaee093978a1a.png_srz_p_45_45_75_22_0.5_1.2_0_png_srz"}/
+  -#      .slick-arrows
+  -#        %button.nav.next.glyphicon-thumb-arrow-right.arrows{"data-hook" => "slick-next-button", "ng-click" => "thumbnailsVM.setNextSelected()", :title => "Вперед", :type => "button"}
+  -#        %button.nav.previous.glyphicon-thumb-arrow-left.arrows{"data-hook" => "slick-prev-button", "ng-click" => "thumbnailsVM.setPrevSelected()", :title => "Назад", :type => "button"}
+  -#  %product-description{:description => "mainVM.productData.description"}
+  -#    %section.description{"data-hook" => "product-page-description", "ng-if" => "descriptionVM.description"}
+  -#      .description-wrapper
+  -#        .content-wrapper{"data-hook" => "product-page-description-content-wrapper", "ng-style" => "{'max-height': descriptionVM.getContentHeightStyle()}"}
+  -#          %pre.content{"data-hook" => "product-page-description-content"} Это описание товара. Здесь вы можете рассказать о нем подробнее. Пусть покупатели узнают, какую выгоду они получат от покупки.
+  -#.columns.medium-6.small-12
+  -#  %header
+  -#    %product-name.product-name
+  -#      %h1.product-name ВАШ ТОВАР
+  -#    %product-sku
+  -#      .label.sku
+  -#        Артикул: 0010
+  -#    %product-price
+  -#      .prices
+  -#        %span $45.00
+  -#  %product-options{"is-mobile" => "false", "is-quick-view" => "false", :product => "mainVM.productData"}
+  -#    .options-wrapper{"data-hook" => "product-page-options-wrapper"}
+  -#      / ngIf: optionsVM.canAddToCart
+  -#      %form.ng-valid.ng-dirty.ng-valid-parse.ng-submitted{:name => "productForm", "ng-if" => "optionsVM.canAddToCart", :novalidate => "", "transactioned-action" => "optionsVM.addToCart()"}
+  -#        / ngRepeat: option in optionsVM.options track by $index
+  -#        / ngRepeat: customText in optionsVM.product.customTexts track by $index
+  -#        / ngIf: optionsVM.isQuantityVisible()
+  -#        .option-row.option-quantity{"ng-if" => "optionsVM.isQuantityVisible()"}
+  -#          %label.label.quantity-label{:translate => "QUANTITY_LABEL"} Количество
+  -#          .dropdown-quantity.ui-select-container.select2.select2-container.ng-valid.ng-touched.ng-dirty.ng-valid-parse{"data-hook" => "quantity-select", "ng-class" => "{'select2-container-active select2-dropdown-open open': $select.open, 'select2-container-disabled': $select.disabled, 'select2-container-active': $select.focus, 'select2-allowclear': $select.allowClear && !$select.isEmpty()}", "ng-model" => "optionsVM.selectedQuantity", "search-enabled" => "false", :theme => "select2"}
+  -#            %a.select2-choice.ui-select-match{"aria-label" => "Select box select", "ng-class" => "{'select2-default': $select.isEmpty()}", "ng-click" => "$select.toggle($event)"}
+  -#              %span.select2-chosen.ng-hide{"ng-show" => "$select.isEmpty()"}
+  -#              %span.select2-chosen{"ng-hide" => "$select.isEmpty()", "ng-transclude" => ""}
+  -#                %span 2
+  -#              / ngIf: $select.allowClear && !$select.isEmpty()
+  -#              %span.select2-arrow.ui-select-toggle
+  -#                %b
+  -#            .ui-select-dropdown.select2-drop.select2-with-searchbox.select2-drop-active.select2-display-none{"ng-class" => "{'select2-display-none': !$select.open}", :style => "opacity: 1;"}
+  -#              .select2-search.ng-hide{"ng-show" => "$select.searchEnabled"}
+  -#                %input.ui-select-search.select2-input.ng-pristine.ng-untouched.ng-valid{"aria-activedescendant" => "ui-select-choices-row-0-1", "aria-expanded" => "true", "aria-label" => "Select box", "aria-owns" => "ui-select-choices-0", :autocapitalize => "off", :autocomplete => "false", :autocorrect => "false", "ng-model" => "$select.search", :role => "combobox", :spellcheck => "false", :type => "text"}/
+  -#              %ul.ui-select-choices.ui-select-choices-content.select2-results{:repeat => "quantity in optionsVM.quantities | limitTo : 10"}
+  -#                %li.ui-select-choices-group{"ng-class" => "{'select2-result-with-children': $select.choiceGrouped($group) }"}
+  -#                  .ui-select-choices-group-label.select2-result-label.ng-hide{"ng-bind" => "$group.name", "ng-show" => "$select.choiceGrouped($group)"}
+  -#                  %ul#ui-select-choices-0.select2-result-single{"ng-class" => "{'select2-result-sub': $select.choiceGrouped($group), 'select2-result-single': !$select.choiceGrouped($group) }", :role => "listbox"}
+  -#            / ngRepeat: quantity in $select.items
+  -#            / ngIf: $select.open
+  -#            / end ngRepeat: quantity in $select.items
+  -#            / ngIf: $select.open
+  -#            / end ngRepeat: quantity in $select.items
+  -#            / ngIf: $select.open
+  -#            / end ngRepeat: quantity in $select.items
+  -#            / ngIf: $select.open
+  -#            / end ngRepeat: quantity in $select.items
+  -#            / ngIf: $select.open
+  -#            / end ngRepeat: quantity in $select.items
+  -#            / ngIf: $select.open
+  -#            / end ngRepeat: quantity in $select.items
+  -#            / ngIf: $select.open
+  -#            / end ngRepeat: quantity in $select.items
+  -#            / ngIf: $select.open
+  -#            / end ngRepeat: quantity in $select.items
+  -#            / ngIf: $select.open
+  -#            / end ngRepeat: quantity in $select.items
+  -#            / ngIf: $select.open
+  -#            / end ngRepeat: quantity in $select.items
+  -#            %ui-select-single
+  -#            %input#focusser-0.ui-select-focusser.ui-select-offscreen{"aria-haspopup" => "true", "aria-label" => "Select box focus", "ng-disabled" => "$select.disabled", :role => "button", :type => "text"}/
+  -#        / end ngIf: optionsVM.isQuantityVisible()
+  -#        %product-action{:prices => "optionsVM.product.prices"}
+  -#          / ngIf: actionVM.isVisible()
+  -#          %button.button-primary.is-button-wide.button-add-to-cart{"data-hook" => "add-to-cart", "ng-class" => "actionVM.getClassList()", "ng-disabled" => "actionVM.isDisabled()", "ng-if" => "actionVM.isVisible()", :type => "submit"}
+  -#            %user-free-text{"data-hook" => "user-free-text", :translation => "actionVM.getTranslationKey() | translate", "user-free-text" => "actionVM.settings.buttonFreeText"}
+  -#              %span.user-free-text{"data-hook" => "user-free-text"} ДОБАВИТЬ В КОРЗИНУ
+  -#  / end ngIf: actionVM.isVisible()
+  -#  / end ngIf: optionsVM.canAddToCart
+  -#  / ngIf: !optionsVM.canAddToCart
+  -#  %product-info-section{"component-data" => "mainVM.productData.additionalInfo", "product-id" => "mainVM.productData.id"}
+  -#    / ngIf: infoSectionVM.additionalInfo.length > 0 && infoSectionVM.isVisible()
+  -#    .product-info-section{"data-hook" => "product-info-section", "ng-if" => "infoSectionVM.additionalInfo.length > 0 && infoSectionVM.isVisible()"}
+  -#      %div{"ng-switch" => "", :on => "infoSectionVM.getType()"}
+  -#        / ngSwitchWhen: expandCollapse
+  -#        %div{"ng-switch-when" => "expandCollapse"}
+  -#          %product-info-section-expand-collapse{"component-data" => "infoSectionVM.additionalInfo", "product-id" => "infoSectionVM.productId"}
+  -#            %ul.info-sections{"data-hook" => "product-page-faq"}
+  -#              / ngRepeat: item in infoSectionExpandCollapseVM.additionalInfo
+  -#              %li.info-section.active{"data-hook" => "product-page-faq-item-active", "ng-attr-data-hook" => "{{infoSectionExpandCollapseVM.isActive(item) ? 'product-page-faq-item-active' :'product-page-faq-item'}}", "ng-class" => "{ active: infoSectionExpandCollapseVM.isActive(item) }", "ng-repeat" => "item in infoSectionExpandCollapseVM.additionalInfo"}
+  -#                %h3.title
+  -#                  %a{"data-hook" => "product-page-faq-toggler", "ng-click" => "infoSectionExpandCollapseVM.toggleAdditionalInfo(item, $index)"}
+  -#                    О ТОВАРЕ
+  -#                %p.content{"ng-bind-html" => "infoSectionVM.convertDataToHtml(item.description)"}
+  -#                %p Это информация о товаре. Расскажите подробно, что он из себя представляет, и перечислите всю необходимую информацию: размеры, материалы, инструкции по уходу и т. д. Это также хорошая возможность сообщить, в чем особенность вашей продукции и какую выгоду покупатели получат в итоге. Подробные сведения о товаре помогут вашим посетителям определиться с покупкой.
+  -#              / end ngRepeat: item in infoSectionExpandCollapseVM.additionalInfo
+  -#              %li.info-section.active{"data-hook" => "product-page-faq-item-active", "ng-attr-data-hook" => "{{infoSectionExpandCollapseVM.isActive(item) ? 'product-page-faq-item-active' :'product-page-faq-item'}}", "ng-class" => "{ active: infoSectionExpandCollapseVM.isActive(item) }", "ng-repeat" => "item in infoSectionExpandCollapseVM.additionalInfo"}
+  -#                %h3.title
+  -#                  %a{"data-hook" => "product-page-faq-toggler", "ng-click" => "infoSectionExpandCollapseVM.toggleAdditionalInfo(item, $index)"}
+  -#                    ПОЛИТИКА ВОЗВРАТА
+  -#                %p.content{"ng-bind-html" => "infoSectionVM.convertDataToHtml(item.description)"}
+  -#                %p Это правила и условия возврата товара и денег. Расскажите посетителям, что нужно сделать, если они захотят вернуть товар и получить назад свои деньги. Четкая и ясная политика возврата — это хороший способ построить доверительные отношения с клиентами.
+  -#  / end ngRepeat: item in infoSectionExpandCollapseVM.additionalInfo
+  -#  / end ngSwitchWhen:
+  -#  / ngSwitchWhen: spreadVertically
+  -#  / ngSwitchWhen: spreadHorizontally
+  -#  / ngSwitchWhen: tabs
+  -#  / ngSwitchDefault:
+  -#  / end ngIf: infoSectionVM.additionalInfo.length > 0 && infoSectionVM.isVisible()
+  -#  %social-networks{"component-data" => "mainVM.productData"}
+  -#    / ngIf: socialNetworksVM.types.length > 0 && socialNetworksVM.isVisible()
+  -#    %ul.social{"data-hook" => "product-page-social", "ng-if" => "socialNetworksVM.types.length > 0 && socialNetworksVM.isVisible()"}
+  -#      / ngRepeat: item in socialNetworksVM.types
+  -#      / ngIf: item.isVisible()
+  -#      %li.social-item{"data-hook" => "product-page-social-item-facebook", "ng-if" => "item.isVisible()", "ng-repeat" => "item in socialNetworksVM.types"}
+  -#        %a.social-icon.social-icon-facebook.glyphicon-facebook{"ng-click" => "socialNetworksVM.openSocialNetwork(item.socialNetwork, $event)", :title => "Поделиться в Facebook"}
+  -#      / end ngIf: item.isVisible()
+  -#      / end ngRepeat: item in socialNetworksVM.types
+  -#      / ngIf: item.isVisible()
+  -#      %li.social-item{"data-hook" => "product-page-social-item-twitter", "ng-if" => "item.isVisible()", "ng-repeat" => "item in socialNetworksVM.types"}
+  -#        %a.social-icon.social-icon-twitter.glyphicon-twitter{"ng-click" => "socialNetworksVM.openSocialNetwork(item.socialNetwork, $event)", :title => "Поделиться в Twitter"}
+  -#      / end ngIf: item.isVisible()
+  -#      / end ngRepeat: item in socialNetworksVM.types
+  -#      / ngIf: item.isVisible()
+  -#      %li.social-item{"data-hook" => "product-page-social-item-google", "ng-if" => "item.isVisible()", "ng-repeat" => "item in socialNetworksVM.types"}
+  -#        %a.social-icon.social-icon-google.glyphicon-google{"ng-click" => "socialNetworksVM.openSocialNetwork(item.socialNetwork, $event)", :title => "Поделиться в Google+"}
+  -#      / end ngIf: item.isVisible()
+  -#      / end ngRepeat: item in socialNetworksVM.types
+  -#      / ngIf: item.isVisible()
+  -#      %li.social-item{"data-hook" => "product-page-social-item-pinterest", "ng-if" => "item.isVisible()", "ng-repeat" => "item in socialNetworksVM.types"}
+  -#        %a.social-icon.social-icon-pinterest.glyphicon-pinterest{"ng-click" => "socialNetworksVM.openSocialNetwork(item.socialNetwork, $event)", :title => "Поделиться в Pinterest"}
+  -#      / end ngIf: item.isVisible()
+  -#      / end ngRepeat: item in socialNetworksVM.types
+  -#      / ngIf: item.isVisible()
+  -#      %li.social-item{"data-hook" => "product-page-social-item-fancy", "ng-if" => "item.isVisible()", "ng-repeat" => "item in socialNetworksVM.types"}
+  -#        %a.social-icon.social-icon-fancy.glyphicon-fancy{"ng-click" => "socialNetworksVM.openSocialNetwork(item.socialNetwork, $event)", :title => "Поделиться в Fancy"}
+  -#          / end ngIf: item.isVisible()
+  -#          / end ngRepeat: item in socialNetworksVM.types
+  -#          / end ngIf: socialNetworksVM.types.length > 0 && socialNetworksVM.isVisible()
