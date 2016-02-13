@@ -6,7 +6,7 @@ class Product < ActiveRecord::Base
   has_many :products, through: :orders_products
   has_many :carts, through: :carts_products
 
-  accepts_nested_attributes_for :product_images
+  accepts_nested_attributes_for :product_images, allow_destroy: true
 
   def to_s
     "#{product_name} || #{product_sku}"

@@ -1,4 +1,7 @@
 class Category < ActiveRecord::Base
+  has_one :category_image
+
+  accepts_nested_attributes_for :category_image
 
   def to_s
     "#{category_name} || #{category_path}"

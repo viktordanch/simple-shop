@@ -21,9 +21,22 @@
 
 %section.row.product-page
   .columns.medium-6.small-12
-    row 1
+    .row
+      .columns.small-12
+        = image_tag @product.product_images.first.image.url
+      .columns.small-12
+        - image_tag @product.product_images.each do |product_image|
+          = product_image product_image.image.url(:thumb)
   .columns.medium-6.small-12
-    row 2
+    .row
+      .columns.small-12
+        %h3= @product.product_name
+        %span.product_sku
+          = @product.product_sku
+      .columns.small-12
+        = @product.product_desc || 'No description'
+      .columns.small-12
+        = @product.product_s_desc || 'No description'
     -#.content-under.product-gallery.position-bottom.location-outside.image-ratio-3-2.navigation-thumbnails{"alt-text" => "mainVM.productData.name", "data-hook" => "product-gallery", "image-ratio" => "true", :media => "mainVM.productData.media", "ng-class" => "[galleryVM.getNavigationPositionClass(), galleryVM.getNavigationLocationClass(),\r\n      galleryVM.getImageRatioClass(), galleryVM.getNavigationTypeClass(), galleryVM.getNoNavigationClass()]", :zoom => "true"}
   -#    .main-media.product-media-container.image-mode-crop{"alt-text" => "galleryVM.altText", "data-hook" => "main-media", "image-mode" => "galleryVM.settings.gallery.imageMode", "image-ratio" => "galleryVM.getMainImageRatio()", :media => "galleryVM.media", "navigation-type" => "galleryVM.getNavigationType()", "ng-class" => "[mainMediaVM.getImageModeClass()]", "selected-index" => "galleryVM.selectedIndex", "swipe-to-scroll" => "galleryVM.swipeToScroll", :zoom => "galleryVM.zoom"}
   -#      / ngIf: mainMediaVM.media.length

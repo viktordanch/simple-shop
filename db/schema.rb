@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160131160541) do
+ActiveRecord::Schema.define(version: 20160213142359) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,6 +70,18 @@ ActiveRecord::Schema.define(version: 20160131160541) do
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
   end
+
+  create_table "category_images", force: :cascade do |t|
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.string   "category_image_file_name"
+    t.string   "category_image_content_type"
+    t.integer  "category_image_file_size"
+    t.datetime "category_image_updated_at"
+    t.integer  "category_id"
+  end
+
+  add_index "category_images", ["category_id"], name: "index_category_images_on_category_id", using: :btree
 
   create_table "departments", force: :cascade do |t|
     t.string   "name"
@@ -170,6 +182,7 @@ ActiveRecord::Schema.define(version: 20160131160541) do
 
   add_foreign_key "carts_products", "carts"
   add_foreign_key "carts_products", "products"
+  add_foreign_key "category_images", "categories"
   add_foreign_key "orders", "users"
   add_foreign_key "orders_products", "orders"
   add_foreign_key "orders_products", "products"
