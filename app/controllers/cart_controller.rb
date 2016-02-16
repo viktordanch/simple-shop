@@ -1,7 +1,6 @@
 # CartController
 class CartController < ApplicationController
   include ActionView::Helpers::NumberHelper
-  layout 'my_shop_b'
 
   def add_product
     product = Product.find_by_id(params[:product_id])

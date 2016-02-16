@@ -1,6 +1,5 @@
 # CartController
 class SessionsController < Devise::SessionsController
-  layout 'my_shop_b'
 
   protected
 

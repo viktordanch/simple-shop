@@ -1,6 +1,5 @@
 # CartController
 class OrdersController < ApplicationController
-  layout 'my_shop_b'
   before_action :authenticate_user!
 
   def create

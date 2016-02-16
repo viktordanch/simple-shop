@@ -1,6 +1,5 @@
 # IndexController
 class IndexController < ApplicationController
-  layout 'my_shop_b'
 
   def landing
     respond_to do |format|

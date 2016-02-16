@@ -1,6 +1,5 @@
 # ProductsController
 class ProductsController < ApplicationController
-  layout 'my_shop_b'
 
   respond_to :html, :json
 
