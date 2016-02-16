@@ -93,6 +93,8 @@
 
     .move-right.off-canvas-wrap{ 'data-offcanvas' => '' }
       .inner-wrap
+        %a.sidebar-catalog-link.left-off-canvas-toggle{ href: '#', ref: 'nofollow'}
+          Show catalog
         .aside.asideProductMenu.left-off-canvas-menu
           %ul.off-canvas-list
             - catalog = Category.catalog

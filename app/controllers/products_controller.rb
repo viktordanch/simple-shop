@@ -39,6 +39,7 @@ class ProductsController < ApplicationController
       category = Category.where(category_path: params[:category]).first
       if category
         @products = Product.where("category_path = ?", "#{params[:category]}").page(params[:page] || 1).per(4)
+        # @products.each { |category|  }
       end
     else
       @categories = Category.where(category_path: @catalog.keys)
@@ -52,7 +53,7 @@ class ProductsController < ApplicationController
       format.js {
         render json: {
           products: @products.to_a,
-          categories: @categories,
+          categories: @categories.map { |c| c.to_json },
           category: params[:category],
           page: params[:page] || 1,
         }.to_json

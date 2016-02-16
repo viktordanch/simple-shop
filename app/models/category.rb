@@ -7,6 +7,14 @@ class Category < ActiveRecord::Base
     "#{category_name} || #{category_path}"
   end
 
+  def to_json
+    {
+        category_name: category_name,
+        category_path: category_path,
+        image_thumb: category_image ? category_image.category_image.url(:thumb) : '/system/missing.png'
+    }
+  end
+
   def self.get_nested_categories_urls(hash)
     s_category = hash.to_s.split('/')
     

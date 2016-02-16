@@ -92,10 +92,10 @@ define(function(require){
     console.log($(window).width() < 769);
     if ($(window).width() < 769) {
       $('.off-canvas-wrap').removeClass('move-right');
-      $('.left-off-canvas-toggle').show();
+      $('.top-bar .left-off-canvas-toggle').show();
     } else {
       $('.off-canvas-wrap').addClass('move-right');
-      $('.left-off-canvas-toggle').hide();
+      $('.top-bar .left-off-canvas-toggle').hide();
     }
   }
 
@@ -121,7 +121,7 @@ define(function(require){
   });
 
   $(document).on('click', '.asideProductMenu .productLink, #catalog .productLink, .topProductMenu .productLink', function(e){
-    var $el = $(e.target);
+    var $el = $(e.target).is('a') ? $(e.target) : $(e.target).closest('a');
 
     if(location.pathname.match(/\/products/)) {
       if (!$el.is('a')) {

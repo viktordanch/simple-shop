@@ -1,12 +1,15 @@
 {{#each categories}}
-  <div class="medium-3 columns category-item">
-    <div class="panel" data-equalizer-watch="" style="height: 264px;">
-      <h3>{{category_name}}</h3>
-      <p>
-        <a class="productLink" href="/products?category={{category_path}}">
-          Show more
-        </a>
-      </p>
+  <div class="medium-3 columns category-item" data-equalizer-watch="product">
+    <div class="allSeriesContainer">
+      <a class="productLink contentLink text-center" href="/products?category={{category_path}}" title="{{category_name}}">
+        <img src="{{image_thumb}}" alt="{{category_name}}">
+        <div class="categoryContainer">
+          <div class="categoryName contentDetails">
+            {{category_name}}
+          </div>
+          <div class="categoryNumber contentDetails"></div>
+        </div>
+      </a>
     </div>
   </div>
 {{/each}}

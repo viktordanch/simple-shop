@@ -10,7 +10,7 @@ class CategoryImage < ActiveRecord::Base
                     url: "/system/:attachment/:style_:basename.:extension",
                     path: ":rails_root/public/system/:attachment/:style_:basename.:extension",
                     styles: {
-                        thumb: '100x100>',
-                        square: '200x200#'
+                        thumb: '200x150',
+                        square: '300x250'
                     }
 end
