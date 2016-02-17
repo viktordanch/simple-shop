@@ -78,7 +78,17 @@ Rails.application.configure do
 
   # Disable automatic flushing of the log to improve performance.
   # config.autoflush_log = false
-  config.action_mailer.default_url_options = { host: 'https://secret-oasis-24519.herokuapp.com', port: 25 }
+  config.action_mailer.default_url_options = { host: 'https://secret-oasis-24519.herokuapp.com' }
+
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+      address:              'smtp.gmail.com',
+      port:                 587,
+      domain:               'gmail.com',
+      user_name:            'ikea.uzghorod@gmail.com',
+      password:             'a22111989a',
+      authentication:       'plain',
+      enable_starttls_auto: true  }
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
