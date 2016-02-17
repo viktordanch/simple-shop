@@ -78,16 +78,16 @@ Rails.application.configure do
 
   # Disable automatic flushing of the log to improve performance.
   # config.autoflush_log = false
-  config.action_mailer.default_url_options = { host: 'https://secret-oasis-24519.herokuapp.com' }
+  config.action_mailer.default_url_options = { host: 'https://secret-oasis-24519.herokuapp.com', port: 25 }
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 
-  # config.paperclip_defaults = {
-  #     :storage => :s3,
-  #     :s3_host_name => 'ikeaprod.s3-website.eu-central-1.amazonaws.com',
-  #     :bucket => 'ikeaprod'
-  # }
+  config.paperclip_defaults = {
+      :storage => :s3,
+      :s3_host_name => 'ikeaprod.s3-website.eu-central-1.amazonaws.com',
+      :bucket => 'ikeaprod'
+  }
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
