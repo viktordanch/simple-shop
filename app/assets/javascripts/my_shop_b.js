@@ -132,7 +132,7 @@ define(function(require){
   $(document).on('click', '.asideProductMenu .productLink, #catalog .productLink, .topProductMenu .productLink', function(e){
     var $el = $(e.target).is('a') ? $(e.target) : $(e.target).closest('a');
 
-    if(location.pathname.match(/\/products/)) {
+    if(location.pathname.match(/\/products/) && !(/^\/products\/[0-9]+$/.test(location.pathname))) {
       if (!$el.is('a')) {
         return false
       } else {

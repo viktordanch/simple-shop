@@ -150,6 +150,9 @@ $sidebar-width: 200px;
         vertical-align: middle;
         &.button {
           margin-bottom: 0;
+          font-size: 14px;
+          padding-top: 8px;
+          padding-bottom: 8px;
         }
         .more {
           font-size: 20px;
@@ -255,8 +258,20 @@ $sidebar-width: 200px;
   }
 }
 
-.row.product-page {
+#product-page {
   background-color: #EDEFF0;
+}
+.paddingTopBottom {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.row.product-page {
+  padding-top: 30px;
+  background-color: #EDEFF0;
+
+  small {
+    font-size: 14px;
+  }
 }
 .allSeriesContainer {
   padding: 6px;

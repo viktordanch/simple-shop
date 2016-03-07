@@ -1,43 +1,45 @@
 - content_for :body_id do
   product-page
-%h3= @product.product_name
-%p
-  = @product.product_desc || 'No description'
-%p
-  = @product.product_s_desc || 'No description'
-%p
-  #{@product.product_price} грн
-%p
-  = @product.product_sku
-%p
-  = @product.file_url
-.add-section
-  = link_to '#', class: 'count-up' do
-    %span.more +
-  = link_to '#', class: 'count-down' do
-    %span.less -
-  %input{ type: 'number', value: 1, name: 'count'}
-  %span.priceBtn
-    = link_to 'Add to cart', '#', class: 'button addToCart tiny', data: { productid: @product.id, count: '1' }
 
 %section.row.product-page
   .columns.medium-6.small-12
-    .row
-      .columns.small-12
+    .row.imageContainer
+      .columns.small-12.text-center.paddingTopBottom
         = image_tag @product.product_images.blank? ? '/system/missing.png' : @product.product_images.first.image.url
       .columns.small-12
         - image_tag @product.product_images.each do |product_image|
           = product_image product_image.image.url(:thumb)
   .columns.medium-6.small-12
     .row
-      .columns.small-12
-        %h3= @product.product_name
-        %span.product_sku
-          = @product.product_sku
-      .columns.small-12
+      .columns.small-12.paddingTopBottom
+        %h3
+          = @product.product_name
+        %small
+          -#Артикульный номер:
+          Article Number: #{@product.product_sku}
+        -#%span.product_sku
+        -#  = @product.product_sku
+      .columns.small-12.paddingTopBottom
+        %b
+          Price:
+          #{@product.product_price} грн
+      .columns.small-12.paddingTopBottom
+        .add-section
+          = link_to '#', class: 'count-up' do
+            %span.more +
+          = link_to '#', class: 'count-down' do
+            %span.less -
+          %input{ type: 'number', value: 1, name: 'count'}
+          %span.priceBtn
+            = link_to 'Add to cart', '#', class: 'button addToCart tiny', data: { productid: @product.id, count: '1' }
+      .columns.small-12.paddingTopBottom
+        .shortDescription
+          %b About product:
         = @product.product_desc || 'No description'
-      .columns.small-12
-        = @product.product_s_desc || 'No description'
+  .columns.medium-12.small-12
+    .fullDescription
+      %b Full description:
+    = @product.product_s_desc || 'No description'
     -#.content-under.product-gallery.position-bottom.location-outside.image-ratio-3-2.navigation-thumbnails{"alt-text" => "mainVM.productData.name", "data-hook" => "product-gallery", "image-ratio" => "true", :media => "mainVM.productData.media", "ng-class" => "[galleryVM.getNavigationPositionClass(), galleryVM.getNavigationLocationClass(),\r\n      galleryVM.getImageRatioClass(), galleryVM.getNavigationTypeClass(), galleryVM.getNoNavigationClass()]", :zoom => "true"}
   -#    .main-media.product-media-container.image-mode-crop{"alt-text" => "galleryVM.altText", "data-hook" => "main-media", "image-mode" => "galleryVM.settings.gallery.imageMode", "image-ratio" => "galleryVM.getMainImageRatio()", :media => "galleryVM.media", "navigation-type" => "galleryVM.getNavigationType()", "ng-class" => "[mainMediaVM.getImageModeClass()]", "selected-index" => "galleryVM.selectedIndex", "swipe-to-scroll" => "galleryVM.swipeToScroll", :zoom => "galleryVM.zoom"}
   -#      / ngIf: mainMediaVM.media.length

@@ -30,7 +30,8 @@
         .product-item
           .image-container.displayTable
             .image.text-center.displayTableCell
-              = image_tag product.product_images.blank? ? '/system/missing.png' : product.product_images.first.url(:thumb)
+              = link_to product_path(product) do
+                = image_tag product.product_images.blank? ? '/system/missing.png' : product.product_images.first.url(:thumb)
           .productDetails
             = link_to product_path(product) do
               .productTitle.floatLeft= product.product_name
