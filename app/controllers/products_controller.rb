@@ -17,7 +17,7 @@ class ProductsController < ApplicationController
     if params[:category]
       products = Product.where(category_path: params[:category]).page(params[:page] || 1).per(4)
     else
-      products = Product.page(params[:page] || 1).per(4)
+      products = Product.page(params[:page] || 1).per(12)
     end
     # require 'pry'; binding.pry;
     render json: {
@@ -37,7 +37,7 @@ class ProductsController < ApplicationController
 
       category = Category.where(category_path: params[:category]).first
       if category
-        @products = Product.where("category_path = ?", "#{params[:category]}").page(params[:page] || 1).per(4)
+        @products = Product.where("category_path = ?", "#{params[:category]}").page(params[:page] || 1).per(12)
         # @products.each { |category|  }
       end
     else

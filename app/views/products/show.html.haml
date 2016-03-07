@@ -6,7 +6,7 @@
 %p
   = @product.product_s_desc || 'No description'
 %p
-  = @product.product_price
+  #{@product.product_price} грн
 %p
   = @product.product_sku
 %p
@@ -17,13 +17,14 @@
   = link_to '#', class: 'count-down' do
     %span.less -
   %input{ type: 'number', value: 1, name: 'count'}
-  = link_to 'Add to cart', '#', class: 'button addToCart', data: { productid: @product.id, count: '1' }
+  %span.priceBtn
+    = link_to 'Add to cart', '#', class: 'button addToCart tiny', data: { productid: @product.id, count: '1' }
 
 %section.row.product-page
   .columns.medium-6.small-12
     .row
       .columns.small-12
-        = image_tag @product.product_images.first.image.url
+        = image_tag @product.product_images.blank? ? '/system/missing.png' : @product.product_images.first.image.url
       .columns.small-12
         - image_tag @product.product_images.each do |product_image|
           = product_image product_image.image.url(:thumb)

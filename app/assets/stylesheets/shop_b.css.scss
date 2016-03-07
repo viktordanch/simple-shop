@@ -40,7 +40,6 @@ header#topHeader {
   z-index: 10000;
   position: fixed;
   width: 100%;
-  z-index: 1;
 }
 .main {
   padding-top: 45px;
@@ -138,6 +137,12 @@ $sidebar-width: 200px;
   overflow: auto;
 }
 
+.productsList {
+  .add-section {
+    text-align: center;
+    padding: 10px;
+  }
+}
 .productsList, #product-page, #cart-page {
     .add-section {
       a {
@@ -157,11 +162,18 @@ $sidebar-width: 200px;
         }
       }
       input {
+        height: 33px;
         width: 51px;
         padding: 5px;
         display: inline-block;
         vertical-align: middle;
         margin-bottom: 0;
+      }
+      .priceBtn {
+        div {
+          display: inline-block;
+          vertical-align: middle;
+        }
       }
     }
 }
@@ -236,6 +248,7 @@ $sidebar-width: 200px;
     position: absolute;
     top: 29px;
     right: 0;
+    z-index: 100;
     &.empty {
       display: none;
     }
@@ -265,4 +278,67 @@ $sidebar-width: 200px;
     //border: 1px solid #45515f;
     border-radius: 6px;
   }
+}
+
+.asideProductMenu, .main {
+  transition: all 0.4s ease 0s;
+}
+
+.productsList .columns {
+  position: relative;
+  height: 330px;
+}
+.product-item, .category-item {
+  height: 330px;
+  overflow: hidden;
+}
+.product-item {
+  width: 100%;
+  padding: 10px;
+  transition: all 0.4s ease 0s;
+  animation-fill-mode: forwards;
+  background: #ffffff;
+
+  .image-container {
+    height: 250px;
+    width: 100%;
+    .image {
+      vertical-align: middle;
+    }
+  }
+
+  .moreInfo {
+    opacity: 0;
+    height: 0;
+    transition: visibility 0s linear 0.7s, opacity 0.7s ease-in-out;
+    animation-fill-mode: forwards;
+  }
+  &:hover {
+    top: 0;
+    left: 0;
+    position: absolute;
+    height: 427px;
+    z-index: 3;
+
+    -webkit-box-shadow: 0px 0px 18px 0px rgba(203,203,203,203.75);
+    -moz-box-shadow: 0px 0px 18px 0px rgba(203,203,203,203.75);
+    box-shadow: 0px 0px 18px 0px rgba(203,203,203,203.75);
+    border: 1px solid #CBCBCB;
+    border-radius: 5px;
+
+    .moreInfo {
+      height: auto;
+      opacity: 1;
+    }
+  }
+}
+.displayTable {
+  display: table;
+}
+.displayTableCell {
+  display: table-cell;
+}
+
+.clearBoth {
+  clear: both;
 }

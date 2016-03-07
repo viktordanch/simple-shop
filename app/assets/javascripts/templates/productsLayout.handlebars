@@ -1,27 +1,28 @@
 {{#each products}}
-  <div class="medium-3 columns product-item">
-    <div class="panel" data-equalizer-watch="">
-      <h3>{{product_name}}</h3>
-      <p>
-        {{product_s_desc}}
-      </p>
-      <p>
-        {{category_path}}
-      </p>
-      <p>
-        {{product_price}}
-      </p>
-      <p>
-        {{product_sku}}
-      </p>
-      <a class="" href="/products/{{id}}">Detail</a>
-      <div class="add-section">
-        <a class="count-up" href="#"><span class="more">+</span>
+  <div class="medium-3 columns">
+    <div class="product-item">
+      <div class="image-container displayTable">
+        <div class="image text-center displayTableCell">
+          <img src="/system/missing.png" alt="Missing">
+        </div>
+      </div>
+      <div class="productDetails">
+        <a href="/products/{{id}}"><div class="productTitle floatLeft">{{product_name}}</div>
+          <div class="price regularPrice">{{product_price}} грн</div>
         </a>
-        <a class="count-down" href="#"><span class="less">-</span>
-        </a>
-        <input name="count" type="number" value="1">
-        <a class="button addToCart" data-productid="{{id}}" data-count="1" href="#">Add to cart</a>
+      </div>
+      <div class="moreInfo">
+        <div class="productDesp">{{product_s_desc}}</div>
+        <div class="add-section">
+          <a class="count-up" href="#"><span class="more">+</span>
+          </a>
+          <input name="count" type="number" value="1">
+          <a class="count-down" href="#"><span class="less">-</span>
+          </a>
+          <span class="priceBtn">
+            <a class="button addToCart tiny" data-productid="{{id}}" data-count="1" href="#">Add to cart</a>
+          </span>
+        </div>
       </div>
     </div>
   </div>

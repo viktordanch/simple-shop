@@ -16,7 +16,6 @@ requirejs.config({
     tokeninput: 'sources/jquery.tokeninput',
     site_helper: 'site_helper',
     foundation_min: 'sources/foundation.min',
-    // modernizr: 'sources/modernizr',
     precompiledTemplates: 'viktor/my_shop_b/precompiledTemplates',
     my_shop_b_router: 'viktor/my_shop_b/router',
     my_shop_b_controller: 'viktor/my_shop_b/controller',
@@ -114,11 +113,21 @@ define(function(require){
       data: { product_id: product_id, count: count }
     }).then(function (data) {
         updateTopCartCount(data.count);
+        showAddToCartAction($el);
     }).fail(function (response) {
       console.log('fail')
     });
     return false;
   });
+  showAddToCartAction = function ($el) {
+    var $span = $el.parent();
+    $el.hide();
+    $span.append("<div>In cart</div>")
+    setTimeout(function(){
+      $span.find('div').remove();
+      $el.show();
+    }, 3000)
+  };
 
   $(document).on('click', '.asideProductMenu .productLink, #catalog .productLink, .topProductMenu .productLink', function(e){
     var $el = $(e.target).is('a') ? $(e.target) : $(e.target).closest('a');

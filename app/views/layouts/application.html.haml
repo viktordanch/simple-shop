@@ -12,6 +12,9 @@
     -# = meta_keywords
     -# = meta_description
     -# = meta_title
+    - cdn = 'https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/'
+    - cdn += 'modernizr.min.js'
+    %script{ src: cdn }
 
     = stylesheet_link_tag('shop_b')
     = render partial: 'layouts/google_analitics'
