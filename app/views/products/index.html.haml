@@ -4,7 +4,7 @@
 .container
   %ul.breadcrumbs
     %li
-      = link_to 'All', products_path, class: 'productLink'
+      = link_to I18n.t('All'), products_path, class: 'productLink'
       -#%a{ href: '#' } All
       -#= params[:category]
     - splited_params = params[:category].to_s.split('/')

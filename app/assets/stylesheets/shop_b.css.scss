@@ -54,6 +54,12 @@ footer {
 }
 
 $sidebar-width: 200px;
+.productLink {
+  span {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+}
 
 .move-right .inner-wrap {
   -ms-transform: none;
@@ -79,7 +85,16 @@ $sidebar-width: 200px;
   text-decoration: none;
   width: 300px;
   text-align: center;
-  background-color: yellow;
+  border-top-left-radius: 7px;
+  border-top-right-radius: 7px;
+  color: #FFFFFF;
+  //background-color: #007095;
+  padding-top: 5px;
+  padding-bottom: 5px;
+
+  &:hover, &:focus, &:active {
+    color: #FFFFFF;
+  }
 
   text-decoration: none;
   -webkit-transform: rotate(90deg);
@@ -301,6 +316,10 @@ $sidebar-width: 200px;
 
 .productsList .columns {
   position: relative;
+}
+.totalPrice {
+  font-weight: bold;
+  font-size: 18px;
 }
 .product-item {
   overflow: hidden;

@@ -5,17 +5,17 @@
   .row
     .small-12.column
       %h1
-        Cart
+        = I18n.t('My Cart')
   .row
     .small-12.column.page-content
       - if @carts_products.count > 0
         %table
           %thead
             %tr
-              %th Art number
-              %th Name
-              %th Count
-              %th Price
+              %th= I18n.t('Article number')
+              %th= I18n.t('Name')
+              %th= I18n.t('Count')
+              %th= I18n.t('Price')
               %th
           %tbody
             - @carts_products.each do |cart|
@@ -39,21 +39,21 @@
                   = link_to cart_path(cart, { product_id: cart.product_id }), class: 'remove-product',
                                              data: { 'product-id' => cart.product_id } do
                     %span.remove
-                      Remove
+                      = I18n.t('Remove')
             %tr
-              %td Total
+              %td.totalPrice= I18n.t('Total')
               %td
               %td
-              %td
+              %td.totalPrice
                 - sum = @carts_products.map { |cart| cart.product_price.to_f * cart.count.to_f }.sum
                 = number_to_currency(sum, unit: "грн", separator: ",", delimiter: "", format: "%n %u")
               %td
         - if current_user
-          = link_to 'Create Order', orders_path, method: 'post', class: 'button'
+          = link_to I18n.t('Create Order'), orders_path, method: 'post', class: 'button', title: I18n.t('Create Order')
         - else
           -#= link_to 'Create Order', '#', class: 'button', 'data-reveal-id' => 'myModal'
-          = link_to 'Create Order', new_user_session_path, class: 'button'
+          = link_to I18n.t('Create Order'), new_user_session_path, class: 'button', title: I18n.t('Create Order')
 
       - else
         %p
-          Your cart is empty
+          I18n.t('Your cart is empty')

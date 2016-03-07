@@ -67,8 +67,8 @@
           %ul.right.topProductMenu
             %li.divider
             %li
-              %a{ href: cart_index_path, title: 'My Cart', class: 'cart_link' }
-                My Cart
+              %a{ href: cart_index_path, title: I18n.t('My Cart'), class: 'cart_link' }
+                = I18n.t('My Cart')
                 - if @cart.product_count > 0
                   %span{ class: 'badge'}
                     = @cart.product_count
@@ -76,10 +76,10 @@
                   %span{ class: 'badge empty'}
             %li.divider
             %li
-              %a{ href: orders_path, title: 'My Orders' } My Orders
+              %a{ href: orders_path, title: I18n.t('My Orders') }= I18n.t('My Orders')
             %li.divider
             %li.has-dropdown
-              %a{ href: products_path, title: 'Catalog' } Catalog
+              %a{ href: products_path, title: I18n.t('Catalog') }= I18n.t('Catalog')
               %ul.dropdown
                 - Category.catalog.each do |category, value|
                   %li
@@ -97,8 +97,8 @@
 
     .move-right.off-canvas-wrap{ 'data-offcanvas' => '' }
       .inner-wrap
-        %a.sidebar-catalog-link.left-off-canvas-toggle{ href: '#', ref: 'nofollow'}
-          Show catalog
+        %a.sidebar-catalog-link.left-off-canvas-toggle.button.primary{ href: '#', ref: 'nofollow'}
+          = I18n.t('Catalog')
         .aside.asideProductMenu.left-off-canvas-menu
           %ul.off-canvas-list
             - catalog = Category.catalog

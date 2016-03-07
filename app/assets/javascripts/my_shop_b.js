@@ -5,6 +5,8 @@ requirejs.config({
     backbone: 'sources/backbone/backbone',
     underscore: 'sources/underscore/underscore',
     //hbs: 'sources/hbs',
+    I18n: 'sources/i18n',
+    i18nTranslation: 'i18n/translations',
     handlebars: 'sources/handlebars',
     text: 'sources/text',
     spinjs: 'sources/spin.min',
@@ -40,6 +42,9 @@ requirejs.config({
     foundation_min: {
       deps: ['jquery']
     },
+    i18nTranslation: {
+      deps: ['I18n']
+    },
     jquery_ujs: {
       deps: ['jquery']
     },
@@ -62,6 +67,7 @@ requirejs.config({
 });
 
 define(function(require){
+  require('i18nTranslation');
   require('foundation_min');
   require('tweenMax');
   require('TweenLite');
@@ -122,7 +128,7 @@ define(function(require){
   showAddToCartAction = function ($el) {
     var $span = $el.parent();
     $el.hide();
-    $span.append("<div>In cart</div>")
+    $span.append("<div>In cart</div>");
     setTimeout(function(){
       $span.find('div').remove();
       $el.show();
@@ -130,6 +136,12 @@ define(function(require){
   };
 
   $(document).on('click', '.asideProductMenu .productLink, #catalog .productLink, .topProductMenu .productLink', function(e){
+    var $menuExpand = $(e.target).is('span') && $(e.target).hasClass('right');
+
+    if ($menuExpand) {
+      return false;
+    }
+
     var $el = $(e.target).is('a') ? $(e.target) : $(e.target).closest('a');
 
     if(location.pathname.match(/\/products/) && !(/^\/products\/[0-9]+$/.test(location.pathname))) {
@@ -151,12 +163,11 @@ define(function(require){
           var products = data.products;
           $('.productsList .categories').html(precompiledCategoriesLayout({ categories: categories }));
           $('.productsList .products').append(precompiledProductsLayout({ products: products }));
-          console.log(data)
           page = 1;
           total_pages = 100;
 
           var parsed_url = data.category ? data.category.split('/') : [];
-          var html_str = '<li><a class="productLink" href="/products">All</a></li>';
+          var html_str = '<li><a class="productLink" href="/products">' + I18n.t('All') + '</a></li>';
           parsed_url.forEach(function(category){
             var index = $.inArray(category, parsed_url);
             html_str += '<li><a class="productLink" href="/products?category=' +
