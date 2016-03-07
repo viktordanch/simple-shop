@@ -11,42 +11,43 @@
     - splited_params.each do |category|
       %li
         - index =  splited_params.find_index(category)
-        - sub_path = splited_params.first(index+1).join('/')
+        - sub_path = splited_params.first(index+1).join('/') + '/'
         = link_to category, products_path({ category: sub_path }), class: 'productLink'
 
-  .row.productsList
-    - @categories.to_a.each do |category|
-      .medium-3.columns.category-item
-        .allSeriesContainer
-          = link_to products_path({category: category.category_path}), class: 'productLink contentLink text-center' do
-            = image_tag category.category_image ? category.category_image.category_image.url(:thumb) : '/system/missing.png'
-            .categoryContainer
-              .categoryName.contentDetails
-                = category.category_name
-              .categoryNumber.contentDetails
-
-    - @products.to_a.each do |product|
-      .medium-3.columns
-        .product-item
-          .image-container.displayTable
-            .image.text-center.displayTableCell
+  .productsList
+    .categories.row
+      - @categories.to_a.each do |category|
+        .medium-3.columns.category-item
+          .allSeriesContainer
+            = link_to products_path({category: category.category_path}), class: 'productLink contentLink text-center' do
+              = image_tag category.category_image ? category.category_image.category_image.url(:thumb) : '/system/missing.png'
+              .categoryContainer
+                .categoryName.contentDetails
+                  = category.category_name
+                .categoryNumber.contentDetails
+    .products.row
+      - @products.to_a.each do |product|
+        .medium-3.columns
+          .product-item
+            .image-container.displayTable
+              .image.text-center.displayTableCell
+                = link_to product_path(product) do
+                  = image_tag product.product_images.blank? ? '/system/missing.png' : product.product_images.first.url(:thumb)
+            .productDetails
               = link_to product_path(product) do
-                = image_tag product.product_images.blank? ? '/system/missing.png' : product.product_images.first.url(:thumb)
-          .productDetails
-            = link_to product_path(product) do
-              .productTitle.floatLeft= product.product_name
+                .productTitle.floatLeft= product.product_name
 
-              .price.regularPrice #{product.product_price} грн
-          .moreInfo
-            .productDesp= product.product_s_desc || 'No description'
-            .add-section
-              = link_to '#', class: 'count-up' do
-                %span.more +
-              %input{ type: 'number', value: 1, name: 'count'}
-              = link_to '#', class: 'count-down' do
-                %span.less -
-              %span.priceBtn
-                = link_to 'Add to cart', '#', class: 'button addToCart tiny', data: { productid: product.id, count: '1' }
+                .price.regularPrice #{product.product_price} грн
+            .moreInfo
+              .productDesp= product.product_s_desc || 'No description'
+              .add-section
+                = link_to '#', class: 'count-up' do
+                  %span.more +
+                %input{ type: 'number', value: 1, name: 'count'}
+                = link_to '#', class: 'count-down' do
+                  %span.less -
+                %span.priceBtn
+                  = link_to 'Add to cart', '#', class: 'button addToCart tiny', data: { productid: product.id, count: '1' }
 
 
       -#.medium-3.columns.product-item{ 'data-equalizer-watch'=>"" }

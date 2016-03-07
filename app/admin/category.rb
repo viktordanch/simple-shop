@@ -1,7 +1,7 @@
 ActiveAdmin.register Category do
   config.per_page = 100
 
-  permit_params :category_name, :category_name, :file_url, category_image_attributes: [ :category_image ]
+  permit_params :category_name, :category_path, :category_name, :file_url, category_image_attributes: [ :category_image ]
 
   index do
     selectable_column

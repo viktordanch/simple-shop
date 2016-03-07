@@ -301,11 +301,13 @@ $sidebar-width: 200px;
 
 .productsList .columns {
   position: relative;
+}
+.product-item {
+  overflow: hidden;
   height: 330px;
 }
-.product-item, .category-item {
-  height: 330px;
-  overflow: hidden;
+.category-item {
+  height: 180px;
 }
 .product-item {
   width: 100%;

@@ -140,25 +140,27 @@ define(function(require){
         var category = $el.attr('href').split('?')[1] ? $el.attr('href').split('?')[1].split('=')[1] : '';
         history.pushState(null, null, 'products?category=' + category);
 
-        $.get($el.attr('href')).then(function (data) {
-          $('.productsList').html('')
-          var precompiledProductsLayout = precompiledProductsLayout;
-        }).fail(function (data) {
-          var parsedDate = JSON.parse(data.responseText);
-          var categories = parsedDate.categories;
-          var products = parsedDate.products;
-          $('.productsList').html(precompiledCategoriesLayout({ categories: categories }));
-          $('.productsList').append(precompiledProductsLayout({ products: products }));
+        $.ajax({
+              url: $el.attr('href'),
+              type: 'GET',
+              dataType: 'json'
+            }
+        ).then(function (data) {
+          $('.productsList .products, .productsList .categories').html('');
+          var categories = data.categories;
+          var products = data.products;
+          $('.productsList .categories').html(precompiledCategoriesLayout({ categories: categories }));
+          $('.productsList .products').append(precompiledProductsLayout({ products: products }));
           console.log(data)
           page = 1;
           total_pages = 100;
 
-          var parsed_url = parsedDate.category ? parsedDate.category.split('/') : [];
-          var html_str = '<li><a class="productLink" href="/products">All</a></li>'
+          var parsed_url = data.category ? data.category.split('/') : [];
+          var html_str = '<li><a class="productLink" href="/products">All</a></li>';
           parsed_url.forEach(function(category){
             var index = $.inArray(category, parsed_url);
             html_str += '<li><a class="productLink" href="/products?category=' +
-                encodeURI(parsed_url.slice(0, index + 1).join('/'))  + '">' + category + '</a></li>'
+                encodeURI(parsed_url.slice(0, index + 1).join('/'))  + '/">' + category + '</a></li>'
           });
           $('#catalog .breadcrumbs').html(html_str);
 

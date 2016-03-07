@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_action :cart
+  before_action :set_locale
   # def set_locale
   #   # I18n.locale = params[:locale]
   #   I18n.locale = params[:locale]
@@ -15,6 +16,10 @@ class ApplicationController < ActionController::Base
   # end
   def current_permission
     @current_permission ||= ::Permissions.permission_for(current_user)
+  end
+
+  def set_locale
+    I18n.locale = params[:locale] || I18n.default_locale
   end
 
   protected

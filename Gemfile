@@ -70,6 +70,8 @@ gem 'rubyzip', '~> 1.1', '>= 1.1.7'
 
 gem 'chosen-rails', '~> 1.4', '>= 1.4.3'
 
+gem 'rails-i18n', '~> 4.0', '>= 4.0.8'
+
 group :test, :development do
   # code style
   gem 'brakeman', require: false
