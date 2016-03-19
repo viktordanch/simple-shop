@@ -14,9 +14,6 @@ class ApplicationController < ActionController::Base
   # def self.default_url_options(options={})
   #   options.merge({ :locale => I18n.locale })
   # end
-  def current_permission
-    @current_permission ||= ::Permissions.permission_for(current_user)
-  end
 
   def set_locale
     I18n.locale = params[:locale] || I18n.default_locale
@@ -25,10 +22,10 @@ class ApplicationController < ActionController::Base
   protected
 
   def cart
-    @cart = Cart.find_by_id(session[:cart_id])
+    @cart = ::Cart.find_by_id(session[:cart_id])
 
     unless @cart
-      @cart = Cart.create
+      @cart = ::Cart.create
       session[:cart_id] = @cart.id
     end
   end
