@@ -14,7 +14,7 @@ ActiveAdmin.register ProductImage do
   show do |ad|
     attributes_table do
       row :product_id do
-        Product.find(ad.product_id.to_i)
+        Product.find_by_id(ad.product_id.to_i) || ''
       end
       row :image do
         image_tag(ad.image.url(:thumb))

@@ -36,3 +36,6 @@ ru:
   Create Order: Заказать
   Your cart is empty: Корзина пустая
   All: Все
+  time:
+   formats:
+     long: "%Y-%m-%d %H:%M:%S"

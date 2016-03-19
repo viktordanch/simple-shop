@@ -51,6 +51,7 @@ ul.token-input-list li input {
     -moz-box-shadow: none;
     box-shadow: none;
     margin-bottom: 0px;
+    top: 0px;
 }
 
 li.token-input-token {
