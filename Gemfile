@@ -71,6 +71,7 @@ gem 'rubyzip', '~> 1.1', '>= 1.1.7'
 gem 'chosen-rails', '~> 1.4', '>= 1.4.3'
 
 gem 'i18n-js', '~> 2.1.2'
+gem 'delayed_job_active_record', '~> 4.1'
 
 group :test, :development do
   # code style

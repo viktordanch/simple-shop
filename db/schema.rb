@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160213142359) do
+ActiveRecord::Schema.define(version: 20160327175901) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -83,8 +83,32 @@ ActiveRecord::Schema.define(version: 20160213142359) do
 
   add_index "category_images", ["category_id"], name: "index_category_images_on_category_id", using: :btree
 
+  create_table "delayed_jobs", force: :cascade do |t|
+    t.integer  "priority",   default: 0, null: false
+    t.integer  "attempts",   default: 0, null: false
+    t.text     "handler",                null: false
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.string   "queue"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
+
   create_table "departments", force: :cascade do |t|
     t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "load_statuses", force: :cascade do |t|
+    t.boolean  "start"
+    t.boolean  "finish"
+    t.string   "error"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -123,6 +147,7 @@ ActiveRecord::Schema.define(version: 20160213142359) do
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
     t.integer  "product_id"
+    t.integer  "number"
   end
 
   add_index "product_images", ["product_id"], name: "index_product_images_on_product_id", using: :btree

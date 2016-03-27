@@ -159,55 +159,11 @@ ActiveAdmin.register_page 'Dashboard' do
 
   page_action :import_images, method: :post do
 
-    count = 0
-    names = []
-    no_products = []
+    temp_file = params[:zip].tempfile
 
-    zip = params[:zip]
-    dir = File.join(Rails.root,"public","events","temp", Time.now.to_s)
-    FileUtils.mkdir_p(dir)
+    Product.delay.import_products_images(temp_file)
 
-    # begin
-      Zip::File.open(zip.path).each do |entry|
-        # entry is a Zip::Entry
-        filename = File.join(dir,entry.name)
-        logger.debug "will extract file to #{filename} to"
-        entry.extract(filename)
-        p = File.new(filename)
-        # ProductImage.create!(image: p)
-        image_name = filename.split('/').last
-        count += 1
-        names << filename.split('/').last
-
-        product = Product.find_by_product_sku(image_name.split('.').first.split('_').first)
-        begin
-          product_image = ProductImage.create!(image: p)
-          #
-          if product
-            product.product_images << product_image
-            product.save
-          else
-            no_products << image_name
-          end
-        rescue => ex
-          notification = notification || { alert: (notification || '') + "error to load #{ex.message}" }
-          notification[:alert] += " error to load #{ex.message}"
-        end
-
-        p.close
-        FileUtils.remove_file(filename)
-      end
-
-      zip.close
-      FileUtils.remove_file(zip.path)
-
-    # rescue => ex
-    #   notification = { alert: (notification || '') + "error to load #{ex.message}" }
-    #   zip.close
-    #   FileUtils.remove_file(zip.path)
-    # end
-
-    notification = { notice: "Ok #{count} #{names.join(' ')} \n No found products: #{no_products.join(', ')}" }
+    notification = { notice: "load file " }
 
     redirect_to :back, notification
   end

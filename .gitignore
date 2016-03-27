@@ -26,4 +26,5 @@ config/initializers/secret_token.rb
 ./app/assets/javascripts/libs/*
 /public/system/images/*
 /public/categories/*
+/public/extracted/*
 
