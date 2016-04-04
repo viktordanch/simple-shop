@@ -346,6 +346,11 @@ define(function(require){
 
   });
 
+  $(document).on('click', '.images_galery img', function(){
+    var original_src = $(this).attr('src').replace('thumb', 'original');
+    $('.large_image img').attr('src', original_src);
+  });
+
   $(document).on('click', '.go-to-product', function(){
     var id = parseInt($('.top-bar .hot-search').val());
     if(parseInt(id)) {
