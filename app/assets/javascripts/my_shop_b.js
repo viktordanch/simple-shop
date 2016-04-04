@@ -187,9 +187,7 @@ define(function(require){
     sideNav();
     $(".off-canvas-submenu").hide();
     $(".off-canvas-submenu-call").click(function() {
-      var icon = $(this).parent().next(".off-canvas-submenu").is(':visible') ? '+' : '-';
-      $(this).parent().next(".off-canvas-submenu").slideToggle('fast');
-      $(this).find("span").text(icon);
+      open_submenu($(this));
     });
 
     $(".hot-search").tokenInput("/products/search",{
@@ -199,7 +197,27 @@ define(function(require){
       searchingText: 'Looking for ...',
       preventDuplicates: true,
     });
+
+    var product_url = location.href.split('/products')
+
+    if(product_url && product_url[1]) {
+      var $el = $('[href="' + '/products' + decodeURI(product_url[1]) + '"]')
+      if($el) {
+        $el.parents('.off-canvas-submenu').each(function(){
+          var $a = $(this).prev().find('a');
+          open_submenu($a);
+        });
+
+        open_submenu($el);
+      }
+    }
   });
+
+  var open_submenu = function($el) {
+    var icon = $el.parent().next(".off-canvas-submenu").is(':visible') ? '+' : '-';
+    $el.parent().next(".off-canvas-submenu").slideToggle('fast');
+    $el.find("span").text(icon);
+  };
 
 
   // infinity scroll

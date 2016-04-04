@@ -36,7 +36,7 @@
             = link_to 'Add to cart', '#', class: 'button addToCart tiny', data: { productid: @product.id, count: '1' }
       .columns.small-12.paddingTopBottom
         .shortDescription
-          %b #{I18n.t('About product')}::
+          %b #{I18n.t('About product')}:
         = @product.product_desc || I18n.t('No description')
   .columns.medium-12.small-12
     .fullDescription
