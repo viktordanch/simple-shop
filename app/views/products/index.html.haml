@@ -11,7 +11,7 @@
     - splited_params.each do |category|
       %li
         - index =  splited_params.find_index(category)
-        - sub_path = splited_params.first(index+1).join('/') + '/'
+        - sub_path = splited_params.first(index+1).join('/')
         = link_to category, products_path({ category: sub_path }), class: 'productLink'
 
   .productsList
@@ -32,7 +32,7 @@
             .image-container.displayTable
               .image.text-center.displayTableCell
                 = link_to product_path(product) do
-                  = image_tag product.product_images.blank? ? '/system/missing.png' : product.product_images.first.url(:thumb)
+                  = image_tag product.product_images.blank? ? '/system/missing.png' : product.main_image_url(:thumb)
             .productDetails
               = link_to product_path(product) do
                 .productTitle.floatLeft= product.product_name

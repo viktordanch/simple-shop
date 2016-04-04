@@ -301,6 +301,10 @@ $sidebar-width: 200px;
       .categoryContainer {
         text-decoration: underline;
       }
+      img {
+        transition: all 0.2s ease-in-out;
+        transform: scale(1.1);
+      }
     }
   }
   &:hover {
@@ -331,7 +335,7 @@ $sidebar-width: 200px;
 .product-item {
   width: 100%;
   padding: 10px;
-  transition: all 0.4s ease 0s;
+  //transition: all 0.4s ease 0s;
   animation-fill-mode: forwards;
   background: #ffffff;
 
@@ -340,6 +344,9 @@ $sidebar-width: 200px;
     width: 100%;
     .image {
       vertical-align: middle;
+      img {
+        transition: all 0.2s ease-in-out;
+      }
     }
   }
 
@@ -365,6 +372,10 @@ $sidebar-width: 200px;
     .moreInfo {
       height: auto;
       opacity: 1;
+    }
+
+    img {
+      transform: scale(1.1);
     }
   }
 }

@@ -21,7 +21,7 @@ class ProductsController < ApplicationController
     end
     # require 'pry'; binding.pry;
     render json: {
-               products: products,
+               products: products.map { |p| p.to_json_with_image },
                page: page,
                total: products.num_pages
            }
@@ -37,7 +37,8 @@ class ProductsController < ApplicationController
 
       category = Category.where(category_path: params[:category]).first
       if category
-        @products = Product.where("category_path = ?", "#{params[:category]}").page(params[:page] || 1).per(12)
+        @products = Product.where("category_path = ? OR category_path = ?", "#{params[:category]}", "#{params[:category]}/")
+                        .page(params[:page] || 1).per(12)
         # @products.each { |category|  }
       end
     else
@@ -51,7 +52,7 @@ class ProductsController < ApplicationController
     respond_to do |format|
       format.js {
         render json: {
-          products: @products.to_a,
+          products: @products.to_a.map { |p| p.to_json_with_image },
           categories: @categories.map { |c| c.to_json },
           category: params[:category],
           page: params[:page] || 1,

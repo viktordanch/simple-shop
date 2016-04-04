@@ -40,12 +40,16 @@ ActiveAdmin.register Product do
     # column :category_path
     # column :product_desc
     panel "Images" do
-      table_for product.product_images do
+      table_for product.product_images.order(:number) do
         column "Images" do |product_image|
           image_tag product_image.image ? product_image.image.url(:thumb) : 'No image'
         end
+       column "nuber" do |product_image|
+         product_image.number
+       end
        column "link" do |product_image|
          a 'show', href: admin_product_image_path(product_image)
+         a 'edit', href: edit_admin_product_image_path(product_image)
          # image_tag product_image.image ? product_image.image.url(:thumb) : 'No image'
         end
       end

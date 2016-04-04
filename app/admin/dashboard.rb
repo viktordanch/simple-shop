@@ -167,4 +167,13 @@ ActiveAdmin.register_page 'Dashboard' do
 
     redirect_to :back, notification
   end
+
+  page_action :import_product_images_table, method: :post do
+
+    ProductImage.import_table(params[:file])
+
+    notification = { notice: "load file " }
+
+    redirect_to :back, notification
+  end
 end

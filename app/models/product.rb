@@ -12,6 +12,17 @@ class Product < ActiveRecord::Base
     "#{product_name} || #{product_sku}"
   end
 
+  def main_image_url(style)
+    product_images.order(:number).first.image.url(style)
+  end
+
+  def to_json_with_image
+    product = self.to_json
+    product = JSON.parse(product)
+    product["image_url"] = self.main_image_url(:thumb)
+    product
+  end
+
   def self.open_spreadsheet(file)
 
     case File.extname(file.original_filename)
@@ -87,7 +98,6 @@ class Product < ActiveRecord::Base
         logger.debug "will extract file to #{filename} to"
         entry.extract(filename) unless File.exist?(filename)
         p = File.new(filename)
-        # ProductImage.create!(image: p)
         image_name = filename.split('/').last
         count += 1
         names << filename.split('/').last
@@ -97,34 +107,36 @@ class Product < ActiveRecord::Base
         begin
           if product
             number = image_name.split('.').first.split('_').last
-            product_image = ProductImage.create!(image: p, number: number)
+            product_image = product.product_images.where(number: number).first
 
-            product.product_images << product_image
-            product.save
+            if product_image
+              product_image.update_attributes(image: p)
+            else
+              product_image = ProductImage.create!(image: p, number: number)
+              product.product_images << product_image
+              product.save
+            end
           else
             no_products << image_name
           end
         rescue => ex
-          # notification = notification || { alert: (notification || '') + "error to load #{ex.message}" }
-          # notification[:alert] += " error to load #{ex.message}"
+          notification = notification || { alert: (notification || '') + "error to load #{ex.message}" }
+          notification[:alert] += " error to load #{ex.message}"
           load_status.update_attributes(error: ex.message)
         end
 
         p.close
         File.delete(filename) if File.exist?(filename) && File.file?(filename)
-        # FileUtils.remove_file(filename)
       end
-
-      # zip.close
-      # FileUtils.remove_file(zip.path)
 
     rescue => ex
       load_status.update_attributes(error: ex.message)
     ensure
-    load_status.update_attributes(finish: true, error: "loaded success: #{count.to_s}, no_products: #{ no_products.join(',')}" )
 
-    temp_file.close if File.exists?( temp_file.path )
-    temp_file.unlink if File.exists?( temp_file.path )
+      temp_file.unlink if File.exists?( temp_file.path )
+      # temp_file.close if File.exists?( temp_file.path )
+
+      load_status.update_attributes(finish: true, error: "loaded success: #{count.to_s}, no_products: #{ no_products.join(',')}" )
     end
   end
 end

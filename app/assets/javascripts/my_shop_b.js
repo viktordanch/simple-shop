@@ -171,7 +171,7 @@ define(function(require){
           parsed_url.forEach(function(category){
             var index = $.inArray(category, parsed_url);
             html_str += '<li><a class="productLink" href="/products?category=' +
-                encodeURI(parsed_url.slice(0, index + 1).join('/'))  + '/">' + category + '</a></li>'
+                encodeURI(parsed_url.slice(0, index + 1).join('/'))  + '">' + category + '</a></li>'
           });
           $('#catalog .breadcrumbs').html(html_str);
 

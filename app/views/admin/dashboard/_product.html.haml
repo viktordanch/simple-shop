@@ -37,10 +37,18 @@
 
 %hr
 %h2
-  Import Image Zip
+  Import Image Zip (Run only on local machine)
 
   = semantic_form_for :dashboard, url: { action: :import_images }, html: { multipart: true } do |f|
     = file_field_tag :zip
+    %br
+    = submit_tag "Import"
+
+%h2
+  Import product images table (Run only on production)
+
+  = semantic_form_for :dashboard, url: { action: :import_product_images_table }, html: { multipart: true } do |f|
+    = file_field_tag :file
     %br
     = submit_tag "Import"
 
