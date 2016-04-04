@@ -4,6 +4,7 @@ requirejs.config({
     jquery_ujs: 'sources/jquery-ujs',
     backbone: 'sources/backbone/backbone',
     underscore: 'sources/underscore/underscore',
+    masonry: 'sources/masonry.pkgd.min',
     //hbs: 'sources/hbs',
     I18n: 'sources/i18n',
     i18nTranslation: 'i18n/translations',
@@ -18,6 +19,7 @@ requirejs.config({
     tokeninput: 'sources/jquery.tokeninput',
     site_helper: 'site_helper',
     foundation_min: 'sources/foundation.min',
+    offcanvas: 'sources/foundation.offcanvas',
     precompiledTemplates: 'viktor/my_shop_b/precompiledTemplates',
     my_shop_b_router: 'viktor/my_shop_b/router',
     my_shop_b_controller: 'viktor/my_shop_b/controller',
@@ -39,6 +41,9 @@ requirejs.config({
   ],
 
   shim: {
+    offcanvas: {
+      deps: ['foundation_min']
+    },
     foundation_min: {
       deps: ['jquery']
     },
@@ -69,14 +74,31 @@ requirejs.config({
 define(function(require){
   require('i18nTranslation');
   require('foundation_min');
+  require('offcanvas');
   require('tweenMax');
   require('TweenLite');
   require('timelineMax');
   require('jquery_ujs');
   require('tokeninput');
+  Masonry = require('masonry');
 
   $(function () {
     $(document).foundation();
+
+    $(document)
+        .on('open.fndtn.offcanvas', '[data-offcanvas]', function() {
+          setTimeout(function(){
+            refreshMasonry();
+          }.bind(this), 10);
+          $('html').css('overflow', 'hidden');
+        })
+        .on('close.fndtn.offcanvas', '[data-offcanvas]', function() {
+          setTimeout(function(){
+            refreshMasonry();
+          }.bind(this), 10);
+
+          $('html').css('overflow', 'auto');
+        });
   });
 
   var siteHelper = require('site_helper');
@@ -93,8 +115,8 @@ define(function(require){
   var precompiledCartTable = precompiledTemplates.getTemplates(cartTable, 'cartTable_template');
 
   function sideNav() {
-    console.log('sideNav');
-    console.log($(window).width() < 769);
+    //console.log('sideNav');
+    //console.log($(window).width() < 769);
     if ($(window).width() < 769) {
       $('.off-canvas-wrap').removeClass('move-right');
       $('.top-bar .left-off-canvas-toggle').show();
@@ -102,11 +124,23 @@ define(function(require){
       $('.off-canvas-wrap').addClass('move-right');
       $('.top-bar .left-off-canvas-toggle').hide();
     }
+
+    if (!(/\/products\?category/.test(location.href))) {
+      $('.off-canvas-wrap').foundation('offcanvas', 'hide', 'move-right');
+    }
+  }
+
+  var refreshMasonry = function () {
+    if(this.msnry) {
+      this.msnry.layout();
+    }
   }
 
   $(window).resize(function() {
     sideNav();
+    refreshMasonry();
   });
+
 
   $(document).on('click', '.addToCart', function(e){
     var $el = $(e.target).is('a') ? $(e.target) : $(e.target).parents('a');
@@ -414,6 +448,19 @@ define(function(require){
       $badge.hide();
     }
   };
+
+  $(window).load(function(){
+    var container = document.querySelector('#container');
+    if (container) {
+      this.msnry = new Masonry( container, {
+        // options
+        itemSelector: '#container li'
+      });
+      setTimeout(function(){
+        refreshMasonry();
+      }.bind(this), 10);
+    }
+  });
 
   var Backbone = require('backbone');
   var router = require('my_shop_b_router');

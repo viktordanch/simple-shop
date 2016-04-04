@@ -398,3 +398,16 @@ $sidebar-width: 200px;
     transform: scale(1.1);
   }
 }
+
+#container > li {
+  border: 1px solid #8C8C8C; /* !test */
+  img {
+    padding-top: 10px;
+    margin-bottom: -10px;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+}
