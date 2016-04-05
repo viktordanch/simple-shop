@@ -52,7 +52,8 @@
           = link_to I18n.t('Create Order'), orders_path, method: 'post', class: 'button', title: I18n.t('Create Order')
         - else
           -#= link_to 'Create Order', '#', class: 'button', 'data-reveal-id' => 'myModal'
-          = link_to I18n.t('Create Order'), new_user_session_path, class: 'button', title: I18n.t('Create Order')
+          = link_to I18n.t('Create Order'), new_user_registration_path, class: 'button modal-order-link',
+                                                                   title: I18n.t('Create Order')
 
       - else
         %p

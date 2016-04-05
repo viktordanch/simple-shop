@@ -1,23 +1,7 @@
 .row
   .large-offset-4.medium-offset-3.small-12.medium-6.large-4.columns.device_page
-    %h2 Log in
+    %h2= I18n.t('Sign to site')
 
-    = form_for(resource, as: resource_name,
-                         url: session_path(resource_name)) do |f|
-      .field
-        = f.label :email
-        = f.email_field :email, autofocus: true
-
-      .field
-        = f.label :password
-        = f.password_field :password, autocomplete: 'off'
-
-      - if devise_mapping.rememberable?
-        .field
-          = f.check_box :remember_me
-          = f.label :remember_me
-
-      .actions
-        = f.submit 'Log in', class: 'primary button expand'
+    = render partial: 'devise/shared/login_form'
 
     = render 'devise/shared/links'

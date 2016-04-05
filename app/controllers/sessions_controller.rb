@@ -1,5 +1,6 @@
 # CartController
 class SessionsController < Devise::SessionsController
+  layout :check_api_params
 
   protected
 

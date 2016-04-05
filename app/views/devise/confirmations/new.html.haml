@@ -4,7 +4,7 @@
   - email = resource.email
 .row
   .large-offset-4.medium-offset-3.small-12.medium-6.large-4.columns.device_page
-    %h2 Resend confirmation instructions
+    %h2= I18n.t('Resend confirmation instructions')
 
     = form_for(resource, as: resource_name,
                          url: confirmation_path(resource_name),
@@ -15,7 +15,7 @@
         = input_errors(resource.errors, :email)
 
       .actions
-        = f.submit 'Resend confirmation instructions',
+        = f.submit I18n.t('Resend confirmation instructions'),
                    class: 'primary button expand'
 
     = render 'devise/shared/links'

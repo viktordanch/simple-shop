@@ -142,6 +142,13 @@ define(function(require){
   });
 
 
+  $(document).on('click', '.modal-order-link', function(e){
+    var url = $(this).attr('href');
+    $('#myModal .modal-body').load(url + '?api=true');
+    $('#myModal').foundation('reveal', 'open');
+    return false;
+  });
+
   $(document).on('click', '.addToCart', function(e){
     var $el = $(e.target).is('a') ? $(e.target) : $(e.target).parents('a');
     var product_id = $el.data('productid');

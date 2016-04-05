@@ -88,12 +88,12 @@
             %li.divider
             %li.has-form
               - if current_user
-                = link_to 'Sign Out', destroy_user_session_path,
+                = link_to I18n.t('Sign Out'), destroy_user_session_path,
                                        method: :delete,
                                        class: 'button',
-                                       title: 'Sign Out'
+                                       title: I18n.t('Sign Out')
               - else
-                %a.button{ href: user_session_path, title: 'Sign Up' } Sign In
+                %a.button{ href: user_session_path, title: 'Sign Up' }= I18n.t('Sign In')
 
     .off-canvas-wrap{ 'data-offcanvas' => '', class: is_products_page ? 'move-right' : '' }
       .inner-wrap
@@ -187,9 +187,8 @@
                 %a{ href: term_of_use_path } Terms of Service
 
         #myModal.reveal-modal{"aria-hidden" => "true", "aria-labelledby" => "modalTitle", "data-reveal" => "", :role => "dialog"}
-          #modalTitle Modal
+          #modalTitle
           .modal-body
-            Body
           %a.close-reveal-modal{"aria-label" => "Close"} ×
 
     = requirejs_include_tag 'my_shop_b'

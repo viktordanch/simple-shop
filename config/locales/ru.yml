@@ -35,6 +35,18 @@ ru:
   Create Order: Заказать
   Your cart is empty: Корзина пустая
   Go to catalog page: Перейти на страницу каталога
+  Sign Out: Выйти
+  Sign In: Войти
+  Already with us?: Уже с нами?
+  Sign Up: Зарегистрироваться
+  Sign to site: Войти на сайт
+  Sign up to site: Регистрация
+  Forgot your password?: Забыли пароль?
+  Didn't receive confirmation instructions?: Не получили подтверждения инструкции?
+  Change your password: Измените свой пароль
+  Send me reset password instructions: Отправить мне инструкцию для сброса пароля
+  Resend confirmation instructions: Повторно выслать инструкцию
+
   All: Все
   time:
    formats:
