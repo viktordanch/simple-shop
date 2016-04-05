@@ -5,4 +5,8 @@ module ApplicationHelper
       "<small class='error'>#{errors.messages[field].first}</small>".html_safe
     end
   end
+
+  def is_products_page
+    request.url =~ /\/products/ && !(request.url =~ /\/products\//)
+  end
 end

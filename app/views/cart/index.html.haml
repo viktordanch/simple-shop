@@ -56,4 +56,4 @@
 
       - else
         %p
-          I18n.t('Your cart is empty')
+          #{I18n.t('Your cart is empty')}. #{link_to I18n.t('Go to catalog page'), products_path, title: I18n.t('Go to catalog page')}

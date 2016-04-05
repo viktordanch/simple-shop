@@ -95,7 +95,7 @@
               - else
                 %a.button{ href: user_session_path, title: 'Sign Up' } Sign In
 
-    .move-right.off-canvas-wrap{ 'data-offcanvas' => '' }
+    .off-canvas-wrap{ 'data-offcanvas' => '', class: is_products_page ? 'move-right' : '' }
       .inner-wrap
         %a.sidebar-catalog-link.left-off-canvas-toggle.button.primary{ href: '#', ref: 'nofollow'}
           = I18n.t('Catalog')

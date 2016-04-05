@@ -20,7 +20,6 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 ru:
-  hello: "Привіт !"
   Article number: Артикульный номер
   Price: Цена
   Name: Название
@@ -35,6 +34,7 @@ ru:
   Catalog: Каталог
   Create Order: Заказать
   Your cart is empty: Корзина пустая
+  Go to catalog page: Перейти на страницу каталога
   All: Все
   time:
    formats:

@@ -117,17 +117,17 @@ define(function(require){
   function sideNav() {
     //console.log('sideNav');
     //console.log($(window).width() < 769);
-    if ($(window).width() < 769) {
-      $('.off-canvas-wrap').removeClass('move-right');
-      $('.top-bar .left-off-canvas-toggle').show();
-    } else {
-      $('.off-canvas-wrap').addClass('move-right');
-      $('.top-bar .left-off-canvas-toggle').hide();
-    }
-
-    if (!(/\/products\?category/.test(location.href))) {
-      $('.off-canvas-wrap').foundation('offcanvas', 'hide', 'move-right');
-    }
+    //if ($(window).width() < 769) {
+    //  $('.off-canvas-wrap').removeClass('move-right');
+    //  $('.top-bar .left-off-canvas-toggle').show();
+    //} else {
+    //  $('.off-canvas-wrap').addClass('move-right');
+    //  $('.top-bar .left-off-canvas-toggle').hide();
+    //}
+    //
+    //if (!(/\/products\?category/.test(location.href))) {
+    //  $('.off-canvas-wrap').foundation('offcanvas', 'hide', 'move-right');
+    //}
   }
 
   var refreshMasonry = function () {
