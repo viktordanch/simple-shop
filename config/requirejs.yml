@@ -18,6 +18,8 @@ paths:
   I18n: 'sources/i18n'
   i18nTranslation: 'i18n/translations'
   foundation_min: 'sources/foundation.min'
+  offcanvas: 'sources/foundation.offcanvas'
+  masonry: 'sources/masonry.pkgd.min'
   precompiledTemplates: 'viktor/my_shop_b/precompiledTemplates'
   my_shop_b_router: 'viktor/my_shop_b/router'
   my_shop_b_controller: 'viktor/my_shop_b/controller'
