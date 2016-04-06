@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
 
   before_action :cart
   before_action :set_locale
+  before_action :configure_permitted_parameters, if: :devise_controller?
   # def set_locale
   #   # I18n.locale = params[:locale]
   #   I18n.locale = params[:locale]
@@ -38,10 +39,22 @@ class ApplicationController < ActionController::Base
     if user_signed_in?
       super
     else
-      message = "Please <a href='#{new_user_session_path}'" \
-                " title='Sign in'>sign in</a> before"
+      message = "#{I18n.t('Please')} <a href='#{new_user_session_path}'" \
+                " title=#{I18n.t('Sign In')}>#{I18n.t('Sign In')}</a>"
       redirect_to root_path,
                   notice: message
     end
+  end
+
+  # def configure_permitted_parameters
+  # devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:avatar, :username, :email, :password, :password_confirmation, :remember_me) }
+  # devise_parameter_sanitizer.for(:sign_in) { |u| u.permit(:avatar, :username, :login, :email, :password, :remember_me) }
+  # devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:avatar, :username, :email, :password, :password_confirmation, :current_password) }
+  # end
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.for(:sign_up) do |u|
+      u.permit(:last_name, :first_name, :address, :telephone, :email, :password, :password_confirmation)
+    end
+    # devise_parameter_sanitizer.permit(:sign_up, keys: [:last_name, :first_name, :address, :telephone])
   end
 end

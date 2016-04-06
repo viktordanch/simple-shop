@@ -7,6 +7,8 @@ ru:
       confirmed: "Ваша учётная запись успешно подтверждена."
       send_instructions: "В течение нескольких минут вы получите письмо с инструкциями по подтверждению вашей учётной записи."
       send_paranoid_instructions: "Если ваш адрес email есть в нашей базе данных, то в течение нескольких минут вы получите письмо с инструкциями по подтверждению вашей учётной записи."
+      You can confirm your account email through the link below: Вы можете подтвердить свою учётную запись, перейдя по ссылке
+      Confirm my account: Подтвердить мою учётную запись
     failure:
       already_authenticated: "Вы уже вошли в систему."
       inactive: "Ваша учётная запись ещё не активирована."
@@ -35,6 +37,10 @@ ru:
       send_paranoid_instructions: "Если ваш адрес email есть в нашей базе данных, то в течение нескольких минут Вы получите письмо с инструкциями по восстановлению вашего пароля."
       updated: "Ваш пароль успешно изменён. Теперь вы вошли в систему."
       updated_not_active: "Пароль успешно изменён."
+      "Your password will not change until you access the link above and create a new one": Ваш пароль не изменится, пока Вы не перейдете по ссылке ниже и не создадите новый.
+      "If you did not request this, please ignore this email": Если Вы этого не делали - просто проигнорируйте это письмо
+      Change my password: Смена пароля
+      "Someone has requested a link to change your password, and you can do this through the link below": Кто-то (возможно, Вы) запросил ссылку на изменение пароля, и Вы можете сменить его по ссылке ниже.
     registrations:
       destroyed: "До свидания! Ваша учётная запись успешно удалена. Надеемся снова увидеть вас."
       signed_up: "Добро пожаловать! Вы успешно зарегистрировались."
