@@ -51,7 +51,7 @@ class ProductImage < ActiveRecord::Base
           message = { error_row: row }
         end
       else
-        product_image.update_attributes(row)
+        product_image.update_attributes(row) if product_image && product
       end
     end
   end
