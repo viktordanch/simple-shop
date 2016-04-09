@@ -96,7 +96,7 @@ Rails.application.configure do
   config.paperclip_defaults = {
       :storage => :s3,
       :s3_host_name => 'ikeaprod.s3-website.eu-central-1.amazonaws.com',
-      :bucket => 'ikeaprod'
+      :bucket => 'ikeadev'
   }
 
   # Do not dump schema after migrations.
