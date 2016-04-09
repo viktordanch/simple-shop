@@ -35,22 +35,24 @@ class ProductImage < ActiveRecord::Base
     header = spreadsheet.row(1).map do |h|
       h.downcase!
       h.gsub!(' ', '_') if h.include?(' ')
-      h = 'product_id' if h == 'product'
       h
     end
 
     rows_range = (2..spreadsheet.last_row)
     rows_range.each do |i|
       row = Hash[[header, spreadsheet.row(i)].transpose]
-      product_image = where(number: row["number"], product_id: row["product_id"]).first
-      product = Product.find_by_id(row["product_id"])
+      product = Product.find_by_product_sku(row["product_sku"])
+      product_image = where(number: row["number"], product_id: product.id).first
       if product && !product_image
+        row.delete('product_sku')
         product_image = create(row)
 
         unless product_image
           message = { error_row: row }
         end
       else
+        row.delete('product_id')
+        row.delete('product_sku')
         product_image.update_attributes(row) if product_image && product
       end
     end

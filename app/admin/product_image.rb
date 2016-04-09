@@ -11,14 +11,15 @@ ActiveAdmin.register ProductImage do
       image_tag(product_image.image.url(:thumb))
     end
     column "Product" do |product_image|
-      "#{product_image.product.product_name} (#{product_image.product.product_sku})"
+      product = product_image.product
+      "#{product ? product.product_name : ''} (#{product ? product.product_sku : ''})"
     end
     actions
   end
 
   csv do
     column :number
-    column :product_id
+    column(:product_sku){ |product_image| product_image.product ? product_image.product.product_sku : '' }
     column :image_file_name
     column :image_content_type
     column :image_file_size
