@@ -1,6 +1,15 @@
 ActiveAdmin.register Product do
   config.per_page = 100
 
+  filter :category, label: "Category", as: :select, collection: Category.all
+  filter :product_name
+  filter :product_sku
+  filter :product_s_desc
+  filter :product_desc
+  filter :manufacturer_name
+  filter :product_price
+  filter :category_path
+
   permit_params :product_sku, :manufacturer_name,
                 :product_name, :product_price, :published, :category_path,
                 :product_desc, _destroy: true,

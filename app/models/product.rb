@@ -13,7 +13,8 @@ class Product < ActiveRecord::Base
   end
 
   def main_image_url(style)
-    product_images.order(:number).first.image.url(style)
+    image = product_images.order(:number).first
+    image ? image.image.url(style) : '/system/missing.png'
   end
 
   def to_json_with_image
@@ -43,7 +44,7 @@ class Product < ActiveRecord::Base
 
       product = where(product_sku: row['product_sku']).first
       if product
-        product.product_desc = row['product_desc']
+        product.product_desc = row['product_s_desc']
         product.product_s_desc = row['product_desc']
         return { error_row: row } unless product.save
       end

@@ -39,7 +39,7 @@
 
                 .price.regularPrice #{product.product_price} грн
             .moreInfo
-              .productDesp= product.product_s_desc || 'No description'
+              .productDesp= product.product_desc || 'No description'
               .add-section
                 = link_to '#', class: 'count-up' do
                   %span.more +
@@ -50,24 +50,3 @@
                   = link_to 'Add to cart', '#', class: 'button addToCart tiny', data: { productid: product.id, count: '1' }
           %br
 
-      -#.medium-3.columns.product-item{ 'data-equalizer-watch'=>"" }
-      -#  .panel
-      -#    %h3= product.product_name
-      -#    %p
-      -#      = product.product_s_desc || 'No description'
-      -#    %p
-      -#      = product.category_path
-      -#    %p
-      -#      = product.product_price
-      -#    %p
-      -#      = product.product_sku
-      -#    = link_to 'Detail', product_path(product), class: ''
-      -#    .add-section
-      -#      = link_to '#', class: 'count-up' do
-      -#        %span.more +
-      -#      = link_to '#', class: 'count-down' do
-      -#        %span.less -
-      -#      %input{ type: 'number', value: 1, name: 'count'}
-      -#      = link_to 'Add to cart', '#', class: 'button addToCart', data: { productid: product.id, count: '1' }
-
-  -#= paginate @products.to_a

@@ -15,7 +15,7 @@ class ProductsController < ApplicationController
     page = params[:page] || 1
 
     if params[:category]
-      products = Product.where(category_path: params[:category]).page(params[:page] || 1).per(4)
+      products = Product.where(category_path: params[:category]).page(params[:page] || 1).per(12)
     else
       products = Product.page(params[:page] || 1).per(12)
     end
@@ -37,6 +37,7 @@ class ProductsController < ApplicationController
 
       category = Category.where(category_path: params[:category]).first
       if category
+
         @products = Product.where("category_path = ? OR category_path = ?", "#{params[:category]}", "#{params[:category]}/")
                         .page(params[:page] || 1).per(12)
         # @products.each { |category|  }

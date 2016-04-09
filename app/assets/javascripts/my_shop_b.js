@@ -240,9 +240,8 @@ define(function(require){
     });
 
     var product_url = location.href.split('/products')
-
     if(product_url && product_url[1]) {
-      var $el = $('[href="' + '/products' + decodeURI(product_url[1]) + '"]')
+      var $el = $('[href="' + '/products' + product_url[1] + '"]')
       if($el) {
         $el.parents('.off-canvas-submenu').each(function(){
           var $a = $(this).prev().find('a');
@@ -257,7 +256,7 @@ define(function(require){
   var open_submenu = function($el) {
     var icon = $el.parent().next(".off-canvas-submenu").is(':visible') ? '+' : '-';
     $el.parent().next(".off-canvas-submenu").slideToggle('fast');
-    $el.find("span").text(icon);
+    $el.find("span.right").text(icon);
   };
 
 
@@ -301,7 +300,7 @@ define(function(require){
           console.log(total_pages)
 
           $('.main .productsList .withSpinn').remove();
-          $('.productsList').append(precompiledProductsLayout({ products: products }));
+          $('.productsList .products').append(precompiledProductsLayout({ products: products }));
         },
         error: function (data) {
           isLoading = false;

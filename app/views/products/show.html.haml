@@ -37,8 +37,8 @@
       .columns.small-12.paddingTopBottom
         .shortDescription
           %b #{I18n.t('About product')}:
-        = @product.product_desc || I18n.t('No description')
+        = raw @product.product_desc || I18n.t('No description')
   .columns.medium-12.small-12
     .fullDescription
       %b #{I18n.t('Description')}:
-    = @product.product_s_desc || I18n.t('No description')
+    = raw @product.product_s_desc || I18n.t('No description')

@@ -22,10 +22,12 @@ html, body, .off-canvas-wrap, .inner-wrap, .main {
 
 // vertical-dropdown
 .vertical-dropdown {
-
+  .top-bar-section .dropdown li a {
+    font-size: 16px;
+  }
   @media only screen and (min-width: 40.063em) {
     .top-bar-section .dropdown {
-      min-width: 400px;
+      min-width: 500px;
     }
 
     .top-bar-section .dropdown li {
@@ -310,7 +312,9 @@ $sidebar-width: 200px;
   &:hover {
     background-color: #FAFAFA;
     //border: 1px solid #45515f;
-    border-radius: 6px;
+    //border-radius: 6px;
+    box-shadow: 0px 0px 18px 0px #cbcbcb;
+    border: 1px solid #CBCBCB;
   }
 }
 
@@ -321,6 +325,12 @@ $sidebar-width: 200px;
 .productsList .columns {
   position: relative;
 }
+
+.productsList .products .columns {
+  height: 330px;
+  margin-bottom: 10px;
+}
+
 .totalPrice {
   font-weight: bold;
   font-size: 18px;
@@ -367,7 +377,7 @@ $sidebar-width: 200px;
     -moz-box-shadow: 0px 0px 18px 0px rgba(203,203,203,203.75);
     box-shadow: 0px 0px 18px 0px rgba(203,203,203,203.75);
     border: 1px solid #CBCBCB;
-    border-radius: 5px;
+    //border-radius: 5px;
 
     .moreInfo {
       height: auto;
@@ -411,3 +421,134 @@ $sidebar-width: 200px;
     }
   }
 }
+
+$bg-color: #2c3e50;
+
+.asideProductMenu {
+  background: lighten($bg-color, 50);
+  ul.off-canvas-submenu {
+    margin-bottom: 5px;
+    margin-left: 5px;
+    li a {
+      //padding-left: 0;
+    }
+  }
+  .off-canvas-list {
+    li {
+      line-height: 16px;
+      list-style-type: none;
+
+      a {
+        padding: 6px;
+        line-height: 18px;
+        font-size: 18px;
+        color: #333;
+        padding-top: 7px;
+        padding-bottom: 7px;
+      }
+    }
+    //.off-canvas-list {
+
+      .productLink {
+        background: $bg-color;
+        &:hover, &.active {
+          background: darken($bg-color, 5);
+        }
+      }
+      .off-canvas-submenu {
+        .productLink {
+          background: lighten($bg-color, 10);
+          &:hover, &.active {
+            background: lighten($bg-color, 5);
+          }
+
+        }
+        .off-canvas-submenu {
+          .productLink {
+            background: lighten($bg-color, 20);
+            &:hover, &.active {
+              background: lighten($bg-color, 15);
+            }
+          }
+          .off-canvas-submenu {
+            .productLink {
+              background: lighten($bg-color, 30);
+              &:hover, &.active {
+                background: lighten($bg-color, 25);
+              }
+            }
+            .off-canvas-submenu {
+              .productLink {
+                background: lighten($bg-color, 40);
+                &:hover &.active {
+                  background: lighten($bg-color, 35);
+                }
+              }
+            }
+          }
+        }
+      }
+
+
+    //}
+  }
+  .link-text, .link-text-single, span.right {
+    //color: #333;
+    color: #fff;
+    padding: 0;
+    width: -webkit-calc(100% - 21px);
+    width: -moz-calc(100% - 21px);
+    width: calc(100% - 21px);
+    display: inline-block;
+    vertical-align: middle;
+  }
+  a {
+    span.right {
+      width: 21px;
+    }
+  }
+}
+
+body {
+  background: #ecf0f1;
+
+  #topHeader {
+    .top-bar {
+      background: #95a5a6;
+
+      li.has-form {
+        background: #95a5a6;
+      }
+      .top_with_link a {
+        font-size: 16px;
+        background: #2c3e50;
+        &:hover, &:active {
+          background: #22313F;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 40.0625em) {
+  .top-bar-section li:not(.has-form) a:not(.button) {
+    background: #333333;
+    line-height: 2.8125rem;
+    padding: 0 0.9375rem;
+  }
+}
+@media only screen and (min-width: 40.0625em) {
+  .top-bar-section .dropdown li {
+    &.two_lines {
+      height: 45px;
+      a {
+        height: 45px;
+        text-align: center;
+        padding-top: 6px;
+        white-space: initial;
+        line-height: 16px;
+      }
+    }
+  }
+}
+

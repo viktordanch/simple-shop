@@ -66,7 +66,7 @@
           / Top Bar Right Nav Elements
           %ul.right.topProductMenu
             %li.divider
-            %li
+            %li.top_with_link
               %a{ href: cart_index_path, title: I18n.t('My Cart'), class: 'cart_link' }
                 = I18n.t('My Cart')
                 - if @cart.product_count > 0
@@ -75,14 +75,14 @@
                 - else
                   %span{ class: 'badge empty'}
             %li.divider
-            %li
+            %li.top_with_link
               %a{ href: orders_path, title: I18n.t('My Orders') }= I18n.t('My Orders')
             %li.divider
-            %li.has-dropdown
+            %li.has-dropdown.top_with_link
               %a{ href: products_path, title: I18n.t('Catalog') }= I18n.t('Catalog')
               %ul.dropdown
                 - Category.catalog.each do |category, value|
-                  %li
+                  %li{ class: category.length > 12 ? 'two_lines' : '' }
                     %a.productLink{ href: "#{products_path}?category=#{category + '/'}" }= category
 
             %li.divider
@@ -104,71 +104,75 @@
             - catalog = Category.catalog
             - catalog.keys.sort.each do |category|
               - _catalog = catalog[category]
-              - url = "#{category}/"
+              - url = URI::encode("#{category}/")
               - if _catalog.keys.blank?
                 %li
-                  %a.productLink{ href: "#{products_path}?category=#{url}" }= category
+                  %a.productLink{ href: "#{products_path}?category=#{url}" }
+                    %span.link-text-single= category
               - else
                 %li
                   %a.productLink.off-canvas-submenu-call{ href: "#{products_path}?category=#{url}" }
-                    = category
+                    %span.link-text
+                      = category
                     %span.right +
                 %ul.off-canvas-submenu
                   - _catalog.keys.sort.each do |_sub_1|
                     - _catalog = catalog[category][_sub_1]
-                    - url = "#{category}/#{_sub_1}"
+                    - url = URI::encode("#{category}/#{_sub_1}")
                     - if _catalog.keys.blank?
                       %li
-                        %a.productLink{ href: "#{products_path}?category=#{url}" }= _sub_1
+                        %a.productLink{ href: "#{products_path}?category=#{url}" }
+                          %span.link-text-single= _sub_1
                     - else
                       %li
                         %a.productLink.off-canvas-submenu-call{ href: "#{products_path}?category=#{url}" }
-                          = _sub_1
+                          %span.link-text= _sub_1
                           %span.right +
                       %ul.off-canvas-submenu
                         - _catalog.keys.sort.each do |_sub_2|
                           - _catalog = catalog[category][_sub_1][_sub_2]
-                          - url = "#{category}/#{_sub_1}/#{_sub_2}"
+                          - url = URI::encode("#{category}/#{_sub_1}/#{_sub_2}")
                           - if _catalog.keys.blank?
                             %li
                               %a.productLink{ href: "#{products_path}?category=#{url}" }
-                                = _sub_2
+                                %span.link-text-single= _sub_2
                           - else
                             %li
                               %a.productLink.off-canvas-submenu-call{ href: "#{products_path}?category=#{url}" }
-                                = _sub_2
+                                %span.link-text= _sub_2
                                 %span.right +
                             %ul.off-canvas-submenu
                               - _catalog.keys.sort.each do |_sub_3|
                                 - _catalog = catalog[category][_sub_1][_sub_2][_sub_3]
-                                - url = "#{category}/#{_sub_1}/#{_sub_2}/#{_sub_3}"
+                                - url = URI::encode("#{category}/#{_sub_1}/#{_sub_2}/#{_sub_3}")
                                 - if _catalog.keys.blank?
                                   %li
-                                    %a.productLink{ href: "#{products_path}?category=#{url}" }= _sub_3
+                                    %a.productLink{ href: "#{products_path}?category=#{url}" }
+                                      %span.link-text-single= _sub_3
                                 - else
                                   %li
                                     %a.productLink.off-canvas-submenu-call{ href: "#{products_path}?category=#{url}" }
-                                      = _sub_3
+                                      %span.link-text= _sub_3
                                       %span.right +
                                   %ul.off-canvas-submenu
                                     - _catalog.keys.sort.each do |_sub_4|
                                       - _catalog = catalog[category][_sub_1][_sub_2][_sub_3][_sub_4]
-                                      - url = "#{category}/#{_sub_1}/#{_sub_2}/#{_sub_3}/#{_sub_4}"
+                                      - url = URI::encode("#{category}/#{_sub_1}/#{_sub_2}/#{_sub_3}/#{_sub_4}")
                                       - if _catalog.keys.blank?
                                         %li
                                           %a.productLink{ href: "#{products_path}?category=#{url}" }
-                                            = _sub_4
+                                            %span.link-text-single= _sub_4
                                       - else
                                         %li
                                           %a.productLink.off-canvas-submenu-call{ href: "#{products_path}?category=#{url}" }
-                                            = _sub_4
+                                            %span.link-text= _sub_4
                                             %span.right +
                                         %ul.off-canvas-submenu
                                           - _catalog.keys.sort.each do |_sub_5|
-                                            - url = "#{category}/#{_sub_1}/#{_sub_2}/#{_sub_3}/#{_sub_4}/#{_sub_5}"
+                                            - url = URI::encode("#{category}/#{_sub_1}/#{_sub_2}/#{_sub_3}/#{_sub_4}/#{_sub_5}")
                                             %li
                                               %a.productLink{ href: "#{products_path}?category=#{url}" }
-                                              = _sub_5
+                                                %span.link-text-single= _sub_5
         %a.exit-off-canvas
         .main
           = yield
