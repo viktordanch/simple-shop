@@ -44,8 +44,8 @@ class Product < ActiveRecord::Base
 
       product = where(product_sku: row['product_sku']).first
       if product
-        product.product_desc = row['product_s_desc']
-        product.product_s_desc = row['product_desc']
+        product.product_desc = row['product_desc']
+        product.product_s_desc = row['product_s_desc']
         return { error_row: row } unless product.save
       end
     end

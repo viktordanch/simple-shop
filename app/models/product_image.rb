@@ -43,7 +43,8 @@ class ProductImage < ActiveRecord::Base
     rows_range.each do |i|
       row = Hash[[header, spreadsheet.row(i)].transpose]
       product_image = where(number: row["number"], product_id: row["product_id"]).first
-      if !product_image
+      product = Product.find_by_id(row["product_id"])
+      if product && !product_image
         product_image = create(row)
 
         unless product_image
