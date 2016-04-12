@@ -30,3 +30,30 @@ ru:
     Address: Адрес
     Remember me: Запомнить меня
     characters minimum: не менее %s символов
+
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              taken: Пользователь с таким электронным адресом уже существует
+              taken_en: user with this email already exist
+            password:
+              blank: Не может быть пустым
+              blank_en: can't be blank
+              too_short: Слишком короткий
+            password_confirmation:
+              confirmation: Не совпадает с паролем
+              blank: Не может быть пустым
+            first_name:
+              blank: Не может быть пустым
+            last_name:
+              blank: Не может быть пустым
+            address:
+              blank: Не может быть пустым
+            telephone:
+              blank: Не может быть пустым
+            email:
+              blank: Не может быть пустым
+

@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  validates :first_name, :last_name, :address, :telephone, presence: true
+
   def to_s
     "#{email}"
   end
