@@ -409,11 +409,12 @@ $sidebar-width: 200px;
   }
 }
 
-#container > li {
+.grid-item--width2,
+.grid-item {
   border: 1px solid #8C8C8C; /* !test */
   img {
-    padding-top: 10px;
-    margin-bottom: -10px;
+    //padding-top: 10px;
+    //margin-bottom: -10px;
     transition: all 0.2s ease-in-out;
     cursor: pointer;
     &:hover {
@@ -552,3 +553,14 @@ body {
   }
 }
 
+.grid-sizer,
+.grid-item { width: 10%; }
+/* 2 columns */
+.grid-item--width2 { width: 30%; }
+.grid-item--width3 { width: 20%; }
+
+//.grid-sizer,
+//.grid-item--width2,
+//.grid-item {
+//  border: 1px solid red;
+//}

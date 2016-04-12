@@ -39,11 +39,11 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: 'localhost' }
   config.action_mailer.delivery_method = :letter_opener
 
-  config.paperclip_defaults = {
-      storage: :s3,
-      s3_host_name: 's3.eu-central-1.amazonaws.com',
-      bucket: 'ikeadev'
-  }
+  # config.paperclip_defaults = {
+  #     storage: :s3,
+  #     s3_host_name: 's3.eu-central-1.amazonaws.com',
+  #     bucket: 'ikeadev'
+  # }
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 end

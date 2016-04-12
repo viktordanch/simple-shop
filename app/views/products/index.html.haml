@@ -20,7 +20,7 @@
         .medium-3.columns.category-item
           .allSeriesContainer
             = link_to products_path({category: category.category_path}), class: 'productLink contentLink text-center' do
-              = image_tag category.category_image ? category.category_image.category_image.url(:thumb) : '/system/missing.png'
+              = image_tag category.category_image ? category.category_image.category_image.url(:square) : '/system/missing.png'
               .categoryContainer
                 .categoryName.contentDetails
                   = category.category_name
@@ -32,7 +32,7 @@
             .image-container.displayTable
               .image.text-center.displayTableCell
                 = link_to product_path(product) do
-                  = image_tag product.product_images.blank? ? '/system/missing.png' : product.main_image_url(:thumb)
+                  = image_tag product.product_images.blank? ? '/system/missing.png' : product.main_image_url(:square)
             .productDetails
               = link_to product_path(product) do
                 .productTitle.floatLeft= product.product_name

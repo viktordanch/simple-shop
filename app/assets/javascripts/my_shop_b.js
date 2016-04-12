@@ -456,12 +456,27 @@ define(function(require){
   };
 
   $(window).load(function(){
-    var container = document.querySelector('#container');
+    //var container = document.querySelector('#container');
+    var container = document.querySelector('.grid');
+    //$('.grid').masonry({
+    //  // set itemSelector so .grid-sizer is not used in layout
+    //  itemSelector: '.grid-item',
+    //  // use element for option
+    //  columnWidth: '.grid-sizer',
+    //  percentPosition: true
+    //})
     if (container) {
       this.msnry = new Masonry( container, {
         // options
-        itemSelector: '#container li'
+        itemSelector: '.grid-item',
+        // use element for option
+        columnWidth: '.grid-sizer',
+        percentPosition: true
       });
+      //this.msnry = new Masonry( container, {
+      //  // options
+      //  itemSelector: '#container li'
+      //});
       setTimeout(function(){
         refreshMasonry();
       }.bind(this), 10);

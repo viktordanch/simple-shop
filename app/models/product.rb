@@ -20,7 +20,7 @@ class Product < ActiveRecord::Base
   def to_json_with_image
     product = self.to_json
     product = JSON.parse(product)
-    product["image_url"] = self.main_image_url(:thumb)
+    product["image_url"] = self.main_image_url(:square)
     product
   end
 

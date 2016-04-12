@@ -4,12 +4,24 @@
   .row
     .small-12.column
       .shopContainer
-        %ul#container.small-block-grid-2.medium-block-grid-4.large-block-grid-6
-          - Product.limit(21).reverse.each_with_index do |product, index|
+        .grid
+          .grid-sizer
+          - Product.limit(23).reverse.each_with_index do |product, index|
+            - index = index + 1
             - next if product.product_images.blank?
-            %li.text-center
+            .text-center
               - style = :thumb
               - style = :square unless (index % 3) > 0
-              - style = :original unless (index % 5) > 0
-              = link_to product_path(product), alt: product.product_name, title: product.product_name do
-                %img{ src: product.main_image_url(style) }
+              - style = :original unless (index % 8) > 0
+              - if style == :thumb
+                .grid-item
+                  = link_to product_path(product), alt: product.product_name, title: product.product_name do
+                    %img{ src: product.main_image_url(style) }
+              - elsif style == :square
+                .grid-item.grid-item--width3
+                  = link_to product_path(product), alt: product.product_name, title: product.product_name do
+                    %img{ src: product.main_image_url(style) }
+              - else
+                .grid-item.grid-item--width2
+                  = link_to product_path(product), alt: product.product_name, title: product.product_name do
+                    %img{ src: product.main_image_url(style) }
