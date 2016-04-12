@@ -1,7 +1,7 @@
 ActiveAdmin.register ProductImage do
   permit_params :image, :product_id, :number
   config.sort_order = 'product_id number'
-  config.per_page = 100
+  config.per_page = 20
 
   index do
     selectable_column

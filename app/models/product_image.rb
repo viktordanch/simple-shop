@@ -41,11 +41,14 @@ class ProductImage < ActiveRecord::Base
     rows_range = (2..spreadsheet.last_row)
     rows_range.each do |i|
       row = Hash[[header, spreadsheet.row(i)].transpose]
+
       product = Product.find_by_product_sku(row["product_sku"])
       product_image = where(number: row["number"], product_id: product.id).first
       if product && !product_image
         row.delete('product_sku')
         product_image = create(row)
+        product_image.product_id = product.id
+        product_image.save
 
         unless product_image
           message = { error_row: row }
