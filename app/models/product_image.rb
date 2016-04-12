@@ -57,6 +57,7 @@ class ProductImage < ActiveRecord::Base
         row.delete('product_id')
         row.delete('product_sku')
         product_image.update_attributes(row) if product_image && product
+        product_image.update_attributes(product_id: product.id) if product_image && product
       end
     end
   end
