@@ -6,7 +6,7 @@
 
     %title= content_for?(:title) ? yield(:title) : 'My Shop'
 
-    -# = render partial: '/layouts/favicon_link'
+    = render partial: 'layouts/favicon_link'
 
     %meta{ content: 'width=device-width, initial-scale=1.0', name: 'viewport' }
     -# = meta_keywords
@@ -44,7 +44,7 @@
           %li.name
             %h1
               %a{ href: root_path }
-                %img{ src: image_path('shop_b/logo.gif') }
+                %img{ src: image_path('logo.png') }
           / Mobile Menu Toggle
           %li.toggle-topbar.menu-icon
             %a{ href: '#' }
