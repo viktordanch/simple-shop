@@ -94,9 +94,9 @@ Rails.application.configure do
   config.log_formatter = ::Logger::Formatter.new
 
   config.paperclip_defaults = {
-      :storage => :s3,
-      :s3_host_name => 'ikeaprod.s3-website.eu-central-1.amazonaws.com',
-      :bucket => 'ikeadev'
+      storage: :s3,
+      s3_host_name: 's3.eu-central-1.amazonaws.com',
+      bucket: 'ikeadev'
   }
 
   # Do not dump schema after migrations.
