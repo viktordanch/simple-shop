@@ -39,8 +39,8 @@ class ApplicationController < ActionController::Base
     if user_signed_in?
       super
     else
-      message = "#{I18n.t('Please')} <a href='#{new_user_session_path}'" \
-                " title=#{I18n.t('Sign In')}>#{I18n.t('Sign In')}</a>"
+      message = "#{I18n.t('Please')}, #{I18n.t('before')} <a href='#{new_user_session_path}'" \
+                " title=#{I18n.t('login')}>#{I18n.t('login')}</a> #{I18n.t('to site')}"
       redirect_to root_path,
                   notice: message
     end
