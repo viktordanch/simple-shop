@@ -142,7 +142,7 @@ $sidebar-width: 200px;
   .left-off-canvas-menu {
     width: $sidebar-width;
   }
-  @media only screen and (max-width: 40em)  {
+  @media only screen and (max-width: 980px)  {
     .main {
       margin-right: -$sidebar-width;
     }

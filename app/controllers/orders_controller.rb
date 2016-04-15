@@ -12,7 +12,11 @@ class OrdersController < ApplicationController
       cart_product.destroy
     end
 
-    redirect_to action: :index, notice: 'Order successfully created'
+    UserMailer.create_order(order.id).deliver_now
+    UserMailer.create_order_admin(order.id).deliver_now
+    
+    flash[:notice] = I18n.t('Order successfully created')
+    redirect_to action: :index
   end
 
   def index
