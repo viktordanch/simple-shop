@@ -138,8 +138,15 @@ $sidebar-width: 200px;
   }
 }
 
-.move-right .left-off-canvas-menu {
-  width: $sidebar-width;
+.move-right {
+  .left-off-canvas-menu {
+    width: $sidebar-width;
+  }
+  @media only screen and (max-width: 40em)  {
+    .main {
+      margin-right: -$sidebar-width;
+    }
+  }
 }
 
 .move-right .exit-off-canvas {
@@ -559,8 +566,38 @@ body {
 .grid-item--width2 { width: 30%; }
 .grid-item--width3 { width: 20%; }
 
-//.grid-sizer,
-//.grid-item--width2,
-//.grid-item {
-//  border: 1px solid red;
-//}
+// Small screens
+@media only screen { } /* Define mobile styles */
+
+@media only screen and (max-width: 40em) {
+  .grid-sizer,
+  .grid-item { width: 33.333%; }
+  /* 2 columns */
+  .grid-item--width2 { width: 66.6666%; }
+  .grid-item--width3 { width: 33.333%; }} /* max-width 640px, mobile-only styles, use when QAing mobile issues */
+
+// Medium screens
+@media only screen and (min-width: 40.063em) { } /* min-width 641px, medium screens */
+
+@media only screen and (min-width: 40.063em) and (max-width: 64em) {
+  .grid-sizer,
+  .grid-item { width: 20%; }
+  /* 2 columns */
+  .grid-item--width2 { width: 40%; }
+  .grid-item--width3 { width: 20%; }
+} /* min-width 641px and max-width 1024px, use when QAing tablet-only issues */
+
+// Large screens
+@media only screen and (min-width: 64.063em) { } /* min-width 1025px, large screens */
+
+@media only screen and (min-width: 64.063em) and (max-width: 90em) {
+
+} /* min-width 1025px and max-width 1440px, use when QAing large screen-only issues */
+
+// XLarge screens
+@media only screen and (min-width: 90.063em) { } /* min-width 1441px, xlarge screens */
+
+@media only screen and (min-width: 90.063em) and (max-width: 120em) { } /* min-width 1441px and max-width 1920px, use when QAing xlarge screen-only issues */
+
+// XXLarge screens
+@media only screen and (min-width: 120.063em) { } /* min-width 1921px, xxlarge screens */

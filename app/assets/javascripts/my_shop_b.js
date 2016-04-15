@@ -89,13 +89,13 @@ define(function(require){
         .on('open.fndtn.offcanvas', '[data-offcanvas]', function() {
           setTimeout(function(){
             refreshMasonry();
-          }.bind(this), 10);
+          }.bind(this), 500);
           $('html').css('overflow', 'hidden');
         })
         .on('close.fndtn.offcanvas', '[data-offcanvas]', function() {
           setTimeout(function(){
             refreshMasonry();
-          }.bind(this), 10);
+          }.bind(this), 500);
 
           $('html').css('overflow', 'auto');
         });
@@ -132,6 +132,7 @@ define(function(require){
 
   var refreshMasonry = function () {
     if(this.msnry) {
+      window.msnry = this.msnry;
       this.msnry.layout();
     }
   }
