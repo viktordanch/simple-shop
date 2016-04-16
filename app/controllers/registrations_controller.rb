@@ -7,7 +7,7 @@ class RegistrationsController < Devise::RegistrationsController
       super
     else
       build_resource(sign_up_params)
-      flash.now[:alert] = 'There was an error with the recaptcha code below. Please re-enter the code.'
+      flash.now[:alert] = "#{I18n.t('There was an error with the recaptcha code below')}. #{I18n.t('Please re-enter the code')}"
       render :new
     end
   end

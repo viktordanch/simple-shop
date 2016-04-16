@@ -50,13 +50,20 @@ ru:
   Send me reset password instructions: Отправить мне инструкцию для сброса пароля
   Resend confirmation instructions: Повторно выслать инструкцию
   Please: Пожалуйста
+  Short description: "Краткое описание ..."
+  "Describe your proposition/problem": "Опишите свое предложение/проблему ..."
+  Send: Отправить
   welcome_to_project: Добро пожаловать
   Hello: Здравствуйте
   Order successfully created: Заказ успешно создан
+  Contact us record created: Contact us запись создана
+  Thanks, your request will be reviewed by administration: Спасибо, Ваш запрос будет рассмотрен администрацией
   About Us: Про нас
   Contact Us: Свяжитесь с нами
   Terms of Service: Условия использования
   All Rights Reserved: Все права защищены
+  There was an error with the recaptcha code below: Ошибка с кодом рекапчи
+  Please re-enter the code: Пожалуйста, введите код повторно
 
   All: Все
   time:

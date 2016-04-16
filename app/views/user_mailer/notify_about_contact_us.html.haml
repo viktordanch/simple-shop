@@ -1,0 +1,9 @@
+%p
+  From: #{@contact_us_record.email}
+%p
+  Created at: #{@contact_us_record.created_at}
+%p
+  Topic #{@contact_us_record.topic}
+%p
+  Message #{@contact_us_record.comment}
+  %a{ href: "#{admin_contact_u_url(@contact_us_record)}" }= admin_contact_us_url(@contact_us_record)

@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     root 'index#landing'
     get '/about_us', to: 'index#about_us'
     get '/contact_us', to: 'index#contact_us'
+    post '/contact', to: 'index#contact'
     get '/term_of_use', to: 'index#term_of_use'
     resources :orders, only: [:index, :create]
     resources :cart, only: [:index, :destroy] do

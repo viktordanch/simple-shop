@@ -21,6 +21,8 @@
 
 ru:
   user:
+    topic: Тема
+    comment: Коммент
     Email: Електронная почта
     First Name: Имя
     Last Name: Фамилия
