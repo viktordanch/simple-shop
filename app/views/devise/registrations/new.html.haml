@@ -41,6 +41,9 @@
         = f.password_field :password_confirmation, autocomplete: 'off'
         = input_errors(resource.errors, :password_confirmation)
 
+      .field.with_recaptcha
+        = recaptcha_tags
+
       .actions
         = f.submit I18n.t('Sign Up'), class: 'primary button expand'
 

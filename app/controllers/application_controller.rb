@@ -41,8 +41,8 @@ class ApplicationController < ActionController::Base
     else
       message = "#{I18n.t('Please')}, #{I18n.t('before')} <a href='#{new_user_session_path}'" \
                 " title=#{I18n.t('login')}>#{I18n.t('login')}</a> #{I18n.t('to site')}"
-      redirect_to root_path,
-                  notice: message
+      flash.now[:notice] = message
+      redirect_to params[:api] ? root_path({ api: params[:api] }) : root_path
     end
   end
 

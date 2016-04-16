@@ -1,5 +1,6 @@
 # IndexController
 class IndexController < ApplicationController
+  layout :check_api_params
 
   def landing
     respond_to do |format|

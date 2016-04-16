@@ -1,6 +1,7 @@
 # CartController
 class CartController < ApplicationController
   include ActionView::Helpers::NumberHelper
+  layout :check_api_params, only: :index
 
   def add_product
     product = Product.find_by_id(params[:product_id])

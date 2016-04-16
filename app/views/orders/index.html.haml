@@ -1,55 +1,55 @@
 - content_for :body_id do
   orders-page
 
-.container
-  %h1
-    Orders
-  .row
-    .small-12.column
-      - if @orders.count > 0
-        %table
-          %thead
-            %tr
-              %td Number
-              %td Products
-              %td Price
-              %td Status
-          %tbody
-            - @orders.each do |order|
-              %tr
-                %td
-                  = order.number
-                %td
-                  %table
-                    %tr
-                      %td Art number
-                      %td Products
-                      %td Count
-                      %td Price
-                    - order.orders_products.each do |order_product|
-                      %tr
-                        %td
-                          = order_product.product_sku
-                        %td
-                          = order_product.product_name
-                        %td
-                          = order_product.count
-                        %td
-                          = number_to_currency(order_product.product_price.to_i * order_product.count.to_i, unit: "грн", separator: ",", delimiter: "", format: "%n %u")
-                %td
-                  - sum = order.orders_products.map { |cart| cart.product_price.to_f * cart.count.to_f }.sum
-                  = number_to_currency(sum, unit: "грн", separator: ",", delimiter: "", format: "%n %u")
-                %td
-                  %ul
-                    - order_statuses = order.statuses.map(&:id)
-                    - Status.active.each do |status|
-                      - if order_statuses.include?(status.id)
-                        %li.active
-                          = status.name
-                      - else
-                        %li.not-active
-                          = status.name
-          %tfoot
 
-      - else
-        No Orders
+%h1
+  Orders
+.row
+  .small-12.column
+    - if @orders.count > 0
+      %table
+        %thead
+          %tr
+            %td Number
+            %td Products
+            %td Price
+            %td Status
+        %tbody
+          - @orders.each do |order|
+            %tr
+              %td
+                = order.number
+              %td
+                %table
+                  %tr
+                    %td Art number
+                    %td Products
+                    %td Count
+                    %td Price
+                  - order.orders_products.each do |order_product|
+                    %tr
+                      %td
+                        = order_product.product_sku
+                      %td
+                        = order_product.product_name
+                      %td
+                        = order_product.count
+                      %td
+                        = number_to_currency(order_product.product_price.to_i * order_product.count.to_i, unit: "грн", separator: ",", delimiter: "", format: "%n %u")
+              %td
+                - sum = order.orders_products.map { |cart| cart.product_price.to_f * cart.count.to_f }.sum
+                = number_to_currency(sum, unit: "грн", separator: ",", delimiter: "", format: "%n %u")
+              %td
+                %ul
+                  - order_statuses = order.statuses.map(&:id)
+                  - Status.active.each do |status|
+                    - if order_statuses.include?(status.id)
+                      %li.active
+                        = status.name
+                    - else
+                      %li.not-active
+                        = status.name
+        %tfoot
+
+    - else
+      No Orders

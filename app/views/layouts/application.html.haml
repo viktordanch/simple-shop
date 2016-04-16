@@ -43,7 +43,7 @@
               MENU
           %li.name
             %h1
-              %a{ href: root_path }
+              %a.ajax_load{ href: root_path }
                 %img{ src: image_path('logo.png') }
           / Mobile Menu Toggle
           %li.toggle-topbar.menu-icon
@@ -67,7 +67,8 @@
           %ul.right.topProductMenu
             %li.divider
             %li.top_with_link
-              %a{ href: cart_index_path, title: I18n.t('My Cart'), class: 'cart_link' }
+              = link_to cart_index_path, title: I18n.t('My Cart'),
+                                         class: 'cart_link ajax_load' do
                 = I18n.t('My Cart')
                 - if @cart.product_count > 0
                   %span{ class: 'badge'}
@@ -76,10 +77,10 @@
                   %span{ class: 'badge empty'}
             %li.divider
             %li.top_with_link
-              %a{ href: orders_path, title: I18n.t('My Orders') }= I18n.t('My Orders')
+              = link_to I18n.t('My Orders'), orders_path, title: I18n.t('My Orders'), class: 'ajax_load'
             %li.divider
             %li.has-dropdown.top_with_link
-              %a{ href: products_path, title: I18n.t('Catalog') }= I18n.t('Catalog')
+              = link_to I18n.t('Catalog'), products_path, title: I18n.t('Catalog'), class: 'ajax_load'
               %ul.dropdown
                 - Category.catalog.each do |category, value|
                   %li{ class: category.length > 12 ? 'two_lines' : '' }
@@ -175,20 +176,21 @@
                                                 %span.link-text-single= _sub_5
         %a.exit-off-canvas
         .main
-          = yield
+          .container.page_content
+            = yield
 
         %footer.container.ft
           .panel
             %ul.foot-links.inline-list
               %li
-                %a{ href: about_us_path, title: 'About Us' } About Us
+                %a.ajax_load{ href: about_us_path, title: I18n.t('About Us') }= I18n.t('About Us')
               %li
-                %a{ href: contact_us_path, title: 'Contact Us' } Contact Us
+                %a.ajax_load{ href: contact_us_path, title: I18n.t('Contact Us') }= I18n.t('Contact Us')
               %li
-                %a{ href: '#' }
-                  &copy; 2012 IKEA, All Rights Reserved
+                %a.ajax_load{ href: term_of_use_path, title: I18n.t('Terms of Service') }
+                  &copy; 2012 IKEA,#{I18n.t('All Rights Reserved')}
               %li
-                %a{ href: term_of_use_path } Terms of Service
+                %a.ajax_load{ href: term_of_use_path, title: I18n.t('Terms of Service') }= I18n.t('Terms of Service')
 
         #myModal.reveal-modal{"aria-hidden" => "true", "aria-labelledby" => "modalTitle", "data-reveal" => "", :role => "dialog"}
           #modalTitle

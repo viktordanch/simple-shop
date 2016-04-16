@@ -135,13 +135,26 @@ define(function(require){
       window.msnry = this.msnry;
       this.msnry.layout();
     }
-  }
+  };
 
   $(window).resize(function() {
     sideNav();
     refreshMasonry();
   });
 
+  $(document).on('click', '.ajax_load', function(e){
+    var $el = $(this);
+    var url = $el.attr('href');
+    var title = $el.attr('title');
+    $('.page_content').load(url + '?api=true', function () {
+      if ($('.shopContainer .grid').length > 0) {
+        window.recreateMasonry();
+      }
+    }.bind(this));
+    window.history.pushState(url, title, url);
+
+    return false;
+  });
 
   $(document).on('click', '.modal-order-link', function(e){
     var url = $(this).attr('href');
@@ -186,7 +199,7 @@ define(function(require){
 
     var $el = $(e.target).is('a') ? $(e.target) : $(e.target).closest('a');
 
-    if(location.pathname.match(/\/products/) && !(/^\/products\/[0-9]+$/.test(location.pathname))) {
+    if((location.pathname.match(/\/products/) && !(/^\/products\/[0-9]+$/.test(location.pathname)))) {
       if (!$el.is('a')) {
         return false
       } else {
@@ -457,15 +470,11 @@ define(function(require){
   };
 
   $(window).load(function(){
-    //var container = document.querySelector('#container');
+    this.recreateMasonry();
+  }.bind(this));
+
+  window.recreateMasonry = function () {
     var container = document.querySelector('.grid');
-    //$('.grid').masonry({
-    //  // set itemSelector so .grid-sizer is not used in layout
-    //  itemSelector: '.grid-item',
-    //  // use element for option
-    //  columnWidth: '.grid-sizer',
-    //  percentPosition: true
-    //})
     if (container) {
       this.msnry = new Masonry( container, {
         // options
@@ -482,7 +491,7 @@ define(function(require){
         refreshMasonry();
       }.bind(this), 10);
     }
-  });
+  };
 
   var Backbone = require('backbone');
   var router = require('my_shop_b_router');

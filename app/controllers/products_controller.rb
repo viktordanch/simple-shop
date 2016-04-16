@@ -1,6 +1,6 @@
 # ProductsController
 class ProductsController < ApplicationController
-
+  layout :check_api_params, only: [:index, :show]
   respond_to :html, :json
 
   def search
