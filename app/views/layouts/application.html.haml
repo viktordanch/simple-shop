@@ -23,7 +23,7 @@
 
     - if content_for(:head)
       = yield(:head)
-  %body{ id: content_for?(:body_id) ? yield(:body_id) : '' }
+  %body.page_body{ id: content_for?(:body_id) ? yield(:body_id) : '' }
     .flashContainer
       - if flash[:notice]
         .alert-box.success.radius{ 'data-alert' => '' }

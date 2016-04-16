@@ -21,7 +21,7 @@ class IndexController < ApplicationController
     if verify_recaptcha
       @contact_us_record.save
       UserMailer.notify_about_contact_us(@contact_us_record.id).deliver_now
-      
+
       flash[:notice] = I18n.t('Thanks, your request will be reviewed by administration')
       redirect_to :contact_us
     else
